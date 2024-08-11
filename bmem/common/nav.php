@@ -45,12 +45,8 @@
 					</li>
 					<li class="nav-item pcoded-hasmenu <?php if($p == 'collected_fees' || $p == 'paid_fees'){ ?> active pcoded-trigger <?php } ?>">
 						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Reports</span></a>
-						<ul class="pcoded-submenu">
-							<?php if($_SESSION["user_level"] == '1'){?>
-								<li <?php if($p == 'collected_fees'){ ?> class="active" <?php } ?>><a href="?p=collected_fees&gr=reports">Collected Fees</a></li>
-							<?php }else{?>
-								<li <?php if($p == 'paid_fees'){ ?> class="active" <?php } ?>><a href="?p=paid_fees&gr=reports">Paid Fees</a></li>
-							<?php }?>							
+						<ul class="pcoded-submenu">							
+							<li <?php if($p == 'collected_fees'){ ?> class="active" <?php } ?>><a href="#">Reports</a></li>													
 						</ul>
 					</li>
 
