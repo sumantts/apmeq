@@ -11,33 +11,47 @@
 		$username = $_POST["username"];
 		$password = $_POST["password"];
 		$status = true;
-		$message = '';
-		
-		//$v = "'".$param1."','".$param2."'";		
+		$message = ''; 		
 		
 		try {
-			$sql = "SELECT login.login_id, login.author_id, login.user_level, login.username, login.password, login.profile_name, author_details.author_status, author_details.author_photo FROM login JOIN author_details ON author_details.author_id = login.author_id WHERE login.username = '".$username."' AND login.password = '".$password."'";
+			$sql = "SELECT user_details.user_id, user_details.user_name, user_details.user_type_id, user_details.hospital_id, user_details.user_mobile, user_details.user_phone, user_details.user_email, user_details.user_dob, user_details.user_address, user_details.user_user_name, user_details.user_password, user_details.user_status, user_type.user_type_name, user_type.user_type_code, user_type.user_type_status FROM user_details JOIN user_type ON user_details.user_type_id = user_type.user_type_id WHERE user_details.user_user_name = '".$username."' AND user_details.user_password = '".$password."' AND user_type.user_type_status = 1";
 			$result = $mysqli->query($sql);
 
 			if ($result->num_rows > 0) {		
 				$row = $result->fetch_array();	
-				$author_status = $row['author_status'];
-				if($author_status == 'active'){
-					$login_id = $row['login_id'];
-					$author_id = $row['author_id'];	
-					$user_level = $row['user_level'];		
-					$username = $row['username'];			
-					$password = $row['password'];			
-					$profile_name = $row['profile_name'];			
-					$author_photo = $row['author_photo'];
+				$user_status = $row['user_status'];
+				if($user_status == 1){
+					$user_id = $row['user_id'];
+					$user_name = $row['user_name'];	
+					$user_type_id = $row['user_type_id'];		
+					$hospital_id = $row['hospital_id'];			
+					$user_mobile = $row['user_mobile'];			
+					$user_phone = $row['user_phone'];			
+					$user_email = $row['user_email'];			
+					$user_dob = $row['user_dob'];			
+					$user_address = $row['user_address'];			
+					$user_user_name = $row['user_user_name'];			
+					$user_password = $row['user_password'];	 
+								
+					$user_type_name = $row['user_type_name'];				
+					$user_type_code = $row['user_type_code'];				
+					$user_type_status = $row['user_type_status'];	
 
-					$_SESSION["username"] = $username;
-					$_SESSION["password"] = $password;			
-					$_SESSION["profile_name"] = $profile_name;			
-					$_SESSION["login_id"] = $login_id;			
-					$_SESSION["author_id"] = $author_id;			
-					$_SESSION["user_level"] = $user_level;			
-					$_SESSION["author_photo"] = $author_photo;
+					$_SESSION["user_id"] = $user_id;
+					$_SESSION["user_name"] = $user_name;			
+					$_SESSION["user_type_id"] = $user_type_id;			
+					$_SESSION["hospital_id"] = $hospital_id;			
+					$_SESSION["user_mobile"] = $user_mobile;			
+					$_SESSION["user_phone"] = $user_phone;			
+					$_SESSION["user_email"] = $user_email;		
+					$_SESSION["user_dob"] = $user_dob;		
+					$_SESSION["user_address"] = $user_address;		
+					$_SESSION["user_user_name"] = $user_user_name;		
+					$_SESSION["user_password"] = $user_password; 
+						
+					$_SESSION["user_type_name"] = $user_type_name; 	
+					$_SESSION["user_type_code"] = $user_type_code; 	
+					$_SESSION["user_type_status"] = $user_type_status; 
 				}else{
 					$status = false;
 					$message = 'Account Inactive';

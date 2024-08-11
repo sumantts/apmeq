@@ -1,5 +1,5 @@
 <?php 
-if(!$_SESSION["login_id"] || !$_SESSION["user_level"]){header('location:?p=signin');}
+if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php'); ?>
 
 <body class="">
@@ -47,7 +47,7 @@ include('common/head.php'); ?>
                 <div class="card">
 
                     <div class="card-header">
-                        <h5>Welcome to Student Fee Management Portal</h5>
+                        <h5>Welcome to Hospital Asset Management Portal</h5>
                         <div class="card-header-right">
                             <div class="btn-group card-option">
                                 <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +63,7 @@ include('common/head.php'); ?>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>The Student Fee Management Portal is a comprehensive digital solution developed to facilitate the management of student fees in educational institutions. This innovative portal offers a centralized platform that automates the entire fee collection process, providing numerous benefits to students, parents, and administrative staff.</p>
+                        <p>The <strong>Hospital Asset Management Portal </strong> is a specialized digital platform designed to streamline the management of a hospital’s assets. Hospitals deal with a vast array of equipment, medical supplies, and infrastructure that are crucial for day-to-day operations. Effective asset management ensures that these resources are available, functional, and well-maintained, which in turn enhances patient care, reduces costs, and improves overall hospital efficiency.</p>
                     </div>
                 </div>
             </div>

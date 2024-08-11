@@ -1,5 +1,5 @@
 <?php
-if(!$_SESSION["login_id"] || $_SESSION["user_level"] != '1'){header('location:?p=signin');}
+if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php'); ?>
 
 <style>
