@@ -6,9 +6,9 @@
 		$dbname = 'apmeq';
 	}else{
 		$host = 'localhost';
-		$username = '';
-		$password = '';
-		$dbname = '';
+		$username = 'apmeqcom_apmeq';
+		$password = 'apmeq123!@#';
+		$dbname = 'apmeqcom_apmeq';
 	}
 	$mysqli = new mysqli($host, $username, $password, $dbname);
 
