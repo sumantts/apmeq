@@ -53,12 +53,7 @@
 		case 'asset-type':
 			$title = "Asset Type";
 			include('setup/asset_type/asset_type.php');		
-		break;
-
-		case 'paid_fees':
-			$title = "Paid Fees";
-			include('reports/paid_fees/paid_fees.php');		
-		break;
+		break; 
 						
 		//DETAILS	 	
 		case 'user-details':
@@ -70,6 +65,27 @@
 			$title = "Asset Details";
 			include('details/asset_details/asset_details.php');		
 		break; 
+
+		case 'supplier':
+			$title = "Supplier";
+			include('details/supplier/supplier.php');		
+		break;
+
+		case 'manufacturer':
+			$title = "Manufacturer";
+			include('details/manufacturer/manufacturer.php');		
+		break;
+
+		case 'service-providers':
+			$title = "Service Providers";
+			include('details/service_providers/service_providers.php');		
+		break;
+						
+		//ACTIONS	 	
+		case 'asset-reallocate':
+			$title = "Asset Reallocate";
+			include('actions/asset_reallocate/asset_reallocate.php');		
+		break; 	
 
 		default:
 		include('signin/signin.php');

@@ -39,6 +39,22 @@
 					<li class="nav-item <?php if($p == 'asset-details'){ ?> active <?php } ?>">
 					    <a href="?p=asset-details&gr=details" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Asset Details</span></a>
 					</li>
+					<li class="nav-item <?php if($p == 'supplier'){ ?> active <?php } ?>">
+					    <a href="?p=supplier&gr=details" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Supplier</span></a>
+					</li>
+					<li class="nav-item <?php if($p == 'manufacturer'){ ?> active <?php } ?>">
+					    <a href="?p=manufacturer&gr=details" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Manufacturer</span></a>
+					</li>
+					<li class="nav-item <?php if($p == 'service-providers'){ ?> active <?php } ?>">
+					    <a href="?p=service-providers&gr=details" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Service Providers</span></a>
+					</li>
+
+					<li class="nav-item pcoded-menu-caption" id="actions">
+						<label>ACTIONS </label>
+					</li>
+					<li class="nav-item <?php if($p == 'asset-reallocate'){ ?> active <?php } ?>">
+						<a href="?p=asset-reallocate&gr=actions" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Asset Reallocate</span></a>
+					</li>
 
 					<li class="nav-item pcoded-menu-caption" id="reports">
 						<label>REPORTS </label>
