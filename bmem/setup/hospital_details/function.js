@@ -9,47 +9,29 @@ $('#category_name').on('blur', function(){
 })
 
 function validateForm(){
-    $designation = $('#designation').val().replace(/^\s+|\s+$/gm,'');
-    $highestQualification = $('#highestQualification').val().replace(/^\s+|\s+$/gm,'');
-    $dateOfJoining = $('#dateOfJoining').val().replace(/^\s+|\s+$/gm,'');
-    $researchInterest = $('#researchInterest').val().replace(/^\s+|\s+$/gm,'');
+    $category_id = $('#category_id').val();
+    $category_name = $('#category_name').val().replace(/^\s+|\s+$/gm,'');
+    $category_slug = $('#category_slug').val().replace(/^\s+|\s+$/gm,'');
+    $activity_status = $('#activity_status').val();
     $status = true;
 
-    if($designation == ''){
+    if($category_name == ''){
         $status = false;
-        $('#designation').removeClass('is-valid');
-        $('#designation').addClass('is-invalid');
+        $('#category_name').removeClass('is-valid');
+        $('#category_name').addClass('is-invalid');
     }else{
-        $('#designation').removeClass('is-invalid');
-        $('#designation').addClass('is-valid');
+        $('#category_name').removeClass('is-invalid');
+        $('#category_name').addClass('is-valid');
     }   
 
-    if($highestQualification == ''){
+    if($category_slug == ''){
         $status = false;
-        $('#highestQualification').removeClass('is-valid');
-        $('#highestQualification').addClass('is-invalid');
+        $('#category_slug').removeClass('is-valid');
+        $('#category_slug').addClass('is-invalid');
     }else{
-        $('#highestQualification').removeClass('is-invalid');
-        $('#highestQualification').addClass('is-valid');
-    }    
-
-    if($dateOfJoining == ''){
-        $status = false;
-        $('#dateOfJoining').removeClass('is-valid');
-        $('#dateOfJoining').addClass('is-invalid');
-    }else{
-        $('#dateOfJoining').removeClass('is-invalid');
-        $('#dateOfJoining').addClass('is-valid');
-    }     
-
-    if($researchInterest == ''){
-        $status = false;
-        $('#researchInterest').removeClass('is-valid');
-        $('#researchInterest').addClass('is-invalid');
-    }else{
-        $('#researchInterest').removeClass('is-invalid');
-        $('#researchInterest').addClass('is-valid');
-    } 
+        $('#category_slug').removeClass('is-invalid');
+        $('#category_slug').addClass('is-valid');
+    }  
 
     $('#submitForm_spinner').hide();
     $('#submitForm_spinner_text').hide();
@@ -66,32 +48,22 @@ $('#submitForm').click(function(){
         $formVallidStatus = validateForm();
 
         if($formVallidStatus == true){
-            $designation = $('#designation').val().replace(/^\s+|\s+$/gm,'');
-            $highestQualification = $('#highestQualification').val().replace(/^\s+|\s+$/gm,'');
-            $secondaryEmail = $('#secondaryEmail').val().replace(/^\s+|\s+$/gm,'');
-            $dateOfJoining = $('#dateOfJoining').val().replace(/^\s+|\s+$/gm,'');
-            $teachingExperience = $('#teachingExperience').val().replace(/^\s+|\s+$/gm,'');
-            $researchInterest = $('#researchInterest').val().replace(/^\s+|\s+$/gm,'');
-            $indExperience = $('#indExperience').val().replace(/^\s+|\s+$/gm,'');	
-            $author_id = $('#author_id').val();	
-            $introduction_id = $('#introduction_id').val();
+            $published = $('#published').val();
+            $category_id = $('#category_id').val();
 
             $.ajax({
                 method: "POST",
-                url: "setup/introduction/function.php",
-                data: { fn: "saveFormData", designation: $designation, highestQualification: $highestQualification, secondaryEmail: $secondaryEmail, dateOfJoining: $dateOfJoining, teachingExperience: $teachingExperience, researchInterest: $researchInterest, indExperience: $indExperience, author_id: $author_id, introduction_id: $introduction_id }
+                url: "setup/hospital_details/function.php",
+                data: { fn: "saveFormData", category_id: $category_id, category_name: $category_name, category_slug: $category_slug, activity_status: $activity_status }
             })
             .done(function( res ) {
                 //console.log(res);
                 $res1 = JSON.parse(res);
                 if($res1.status == true){
                     $('#orgFormAlert1').show();
-                    //$('#myForm')[0].reset();
-                    $('#author_id').val($res1.author_id);
-                    $('#introduction_id').val($res1.introduction_id);
-
-                    //$('#exampleModalLong').modal('hide');
-                    //populateDataTable();
+                    $('#myForm')[0].reset();
+                    $('#exampleModalLong').modal('hide');
+                    populateDataTable();
                 }else{
                     
                 }                
@@ -100,17 +72,17 @@ $('#submitForm').click(function(){
                 $('#submitForm_text').show();
             });//end ajax
         }
+
     }, 500)    
 })
 
 function editTableData($category_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
-    $('#exampleModalLong').modal('show');
 
-    /*$.ajax({
+    $.ajax({
         method: "POST",
-        url: "setup/introduction/function.php",
+        url: "setup/hospital_details/function.php",
         data: { fn: "getFormEditData", category_id: $category_id }
     })
     .done(function( res ) {
@@ -124,16 +96,16 @@ function editTableData($category_id){
 
             $('#exampleModalLong').modal('show');
         }
-    });*/ //end ajax
+    });//end ajax
 
-}//end
+}
 
 //Delete function	
 function deleteTableData($category_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
-            url: "setup/introduction/function.php",
+            url: "setup/hospital_details/function.php",
             data: { fn: "deleteTableData", category_id: $category_id }
         })
         .done(function( res ) {
@@ -177,7 +149,7 @@ function populateDataTable(){
     $('#example').DataTable({ 
         responsive: true,
         serverMethod: 'GET',
-        ajax: {'url': 'setup/introduction/function.php?fn=getTableData' },
+        ajax: {'url': 'setup/hospital_details/function.php?fn=getTableData' },
         dom: 'Bfrtip',
         buttons: [
             {
@@ -211,12 +183,10 @@ function populateDataTable(){
     });
 }//end fun
 
-
-
 function configureCategoryDropDown(){
     $.ajax({
         method: "POST",
-        url: "setup/introduction/function.php",
+        url: "setup/hospital_details/function.php",
         data: { fn: "getAllCategoryName" }
     })
     .done(function( res ) {
@@ -242,7 +212,7 @@ function configureCategoryDropDown(){
 function configureAuthorDropDown(){
     $.ajax({
         method: "POST",
-        url: "setup/introduction/function.php",
+        url: "setup/hospital_details/function.php",
         data: { fn: "getAllAuthorsyName" }
     })
     .done(function( res ) {
@@ -270,52 +240,3 @@ $(document).ready(function () {
     //configureCategoryDropDown();
     //configureAuthorDropDown();
 });
-
-function calculateDateDifference(date1, date2) {
-    // Create two Date objects from the input dates.
-    const startDate = new Date(date1);
-    const endDate = new Date(date2);
-  
-    // Calculate the difference in milliseconds between the two dates.
-    const timeDifference = endDate.getTime() - startDate.getTime();
-  
-    // Convert the time difference to days.
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  
-    // Calculate the difference in years.
-    const yearsDifference = Math.floor(daysDifference / 365);
-  
-    // Calculate the difference in months.
-    const monthsDifference = Math.floor((daysDifference % 365) / 30);
-  
-    // Return the difference in years, months, and days.
-    return {
-      years: yearsDifference,
-      months: monthsDifference,
-      days: daysDifference % 30,
-    };
-  }
-  
-  // Example usage:
-  
-  
-
-  $('#dateOfJoining').on('change', function(){
-    console.log('connecting...');
-    const today = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-      });
-    console.log(today); // "2023-06-14"
-
-    $dateOfJoining = $('#dateOfJoining').val();
-    const date1 = new Date($dateOfJoining);
-    const date2 = new Date(today);
-    
-    const dateDifference = calculateDateDifference(date1, date2);
-    
-    console.log(dateDifference); // { years: 1, months: 1, days: 25 }
-    $teachingExperienceTxt = dateDifference.years + ' years ' + dateDifference.months + ' months ' + dateDifference.days + ' days';
-    $('#teachingExperience').val($teachingExperienceTxt)
-  })

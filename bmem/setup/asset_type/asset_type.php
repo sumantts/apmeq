@@ -165,4 +165,4 @@ include('common/head.php'); ?>
 <!-- [ Main Content ] end -->
 	<?php include('common/footer.php'); ?>
     
-    <script src="setup/department/function.js?d=<?=date('YmdHis')?>"></script>
+    <script src="setup/asset_type/function.js?d=<?=date('YmdHis')?>"></script>

@@ -35,35 +35,24 @@
 			include('setup/department/department.php');		
 		break; 	
 
-		case 'fee_particulars':
-			$title = "Fee Particulars";
-			include('setup/fee_particulars/fee_particulars.php');		
+		case 'hospital-details':
+			$title = "Hospital Details";
+			include('setup/hospital_details/hospital_details.php');		
 		break; 	
 
-		case 'course_fee':
-			$title = "Course Fee";
-			include('setup/course_fee/course_fee.php');		
-		break; 	 	
-
-		case 'collect_course_fee':
-			$title = "Collect Course Fee";
-			include('setup/collect_course_fee/collect_course_fee.php');		
+		case 'user-type':
+			$title = "User Type";
+			include('setup/user_type/user_type.php');		
 		break; 	
 
 		case 'students':
 			$title = "students";
 			include('setup/students/students.php');		
 		break; 
-		
-		case 'introduction':
-			$title = "Introduction";
-			include('setup/introduction/introduction.php');		
-		break;
-
-		//Reports		
-		case 'collected_fees':
-			$title = "Collected Fees";
-			include('reports/collected_fees/collected_fees.php');		
+					
+		case 'asset-type':
+			$title = "Asset Type";
+			include('setup/asset_type/asset_type.php');		
 		break;
 
 		case 'paid_fees':
@@ -71,6 +60,17 @@
 			include('reports/paid_fees/paid_fees.php');		
 		break;
 						
+		//DETAILS	 	
+		case 'user-details':
+			$title = "User Details";
+			include('details/user_details/user_details.php');		
+		break; 	
+
+		case 'asset-details':
+			$title = "Asset Details";
+			include('details/asset_details/asset_details.php');		
+		break; 
+
 		default:
 		include('signin/signin.php');
 	}
