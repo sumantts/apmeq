@@ -3,7 +3,7 @@ if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=si
 include('common/head.php'); ?>
 
 <style>
-    table td {
+    /*table td {
         word-break: break-word;
         vertical-align: top;
         white-space: normal !important;
@@ -11,7 +11,7 @@ include('common/head.php'); ?>
 
     .myclass {
         text-transform: lowercase;
-    }
+    }*/
 </style>
 
 <body class="">
@@ -78,8 +78,8 @@ include('common/head.php'); ?>
                                     <tr>
                                         <th>Sl.No.</th>
                                         <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Department Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -87,8 +87,8 @@ include('common/head.php'); ?>
                                     <tr>
                                         <th>Sl.No.</th>
                                         <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Department Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -111,8 +111,8 @@ include('common/head.php'); ?>
                             <form class="needs-validation" novalidate id="myForm" name="myForm">
                                 <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_name">Department Name</label>
-                                        <input type="text" class="form-control" name="category_name" id="category_name">
+                                        <label for="department_name" class="text-danger">Department Name*</label>
+                                        <input type="text" class="form-control" name="department_name" id="department_name">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
@@ -122,8 +122,8 @@ include('common/head.php'); ?>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_slug">Slug</label>
-                                        <input type="text" class="form-control myclass" name="category_slug" id="category_slug" readonly>
+                                        <label for="department_code" class="text-danger">Department Code*</label>
+                                        <input type="text" class="form-control myclass" name="department_code" id="department_code">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
@@ -133,12 +133,12 @@ include('common/head.php'); ?>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="activity_status">Active</label>
-                                        <select class="form-control" name="activity_status" id="activity_status">
-                                            <option value="inactive">Inactive</option>
-                                            <option value="active">Active</option>
+                                        <label for="department_status">Status</label>
+                                        <select class="form-control" name="department_status" id="department_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
-                                        <input type="hidden" name="category_id" id="category_id" value="0">
+                                        <input type="hidden" name="department_id" id="department_id" value="0">
                                     </div> 
                                 </div> 
                             </form>

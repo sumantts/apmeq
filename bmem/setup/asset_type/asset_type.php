@@ -1,18 +1,6 @@
 <?php
 if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
-include('common/head.php'); ?>
-
-<style>
-    table td {
-        word-break: break-word;
-        vertical-align: top;
-        white-space: normal !important;
-    }
-
-    .myclass {
-        text-transform: lowercase;
-    }
-</style>
+include('common/head.php'); ?> 
 
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -77,18 +65,18 @@ include('common/head.php'); ?>
                                 <thead>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Asset Type</th>
+                                        <th>Asset Type Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Asset Type</th>
+                                        <th>Asset Type Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -111,34 +99,34 @@ include('common/head.php'); ?>
                             <form class="needs-validation" novalidate id="myForm" name="myForm">
                                 <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_name">Department Name</label>
-                                        <input type="text" class="form-control" name="category_name" id="category_name">
+                                        <label for="asset_type_name" class="text-danger">Asset Type*</label>
+                                        <input type="text" class="form-control" name="asset_type_name" id="asset_type_name">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Name.
+                                            Please provide Asset Type.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_slug">Slug</label>
-                                        <input type="text" class="form-control myclass" name="category_slug" id="category_slug" readonly>
+                                        <label for="asset_type_code" class="text-danger">Asset Type Code*</label>
+                                        <input type="text" class="form-control myclass" name="asset_type_code" id="asset_type_code">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Slug.
+                                            Please provide Asset Type Code.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="activity_status">Active</label>
-                                        <select class="form-control" name="activity_status" id="activity_status">
-                                            <option value="inactive">Inactive</option>
-                                            <option value="active">Active</option>
+                                        <label for="asset_type_status">Active</label>
+                                        <select class="form-control" name="asset_type_status" id="asset_type_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
-                                        <input type="hidden" name="category_id" id="category_id" value="0">
+                                        <input type="hidden" name="asset_type_id" id="asset_type_id" value="0">
                                     </div> 
                                 </div> 
                             </form>

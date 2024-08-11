@@ -1,36 +1,40 @@
 $('#onMyModal').on('click', function(){
+    $('#user_type_id').val('0');
+    $('#user_type_name').val('');
+    $('#user_type_code').val('');
+    $('#user_type_status').val('1').trigger('change');
     $('#exampleModalLong').modal('show');
 })
 
-$('#category_name').on('blur', function(){
-    $category_name = $('#category_name').val();
-    $category_slug = $category_name.replace(/ /g,"_");
-    $('#category_slug').val($category_slug).toLowerCase();
+$('#user_type_name').on('blur', function(){
+    $user_type_name = $('#user_type_name').val();
+    $user_type_code = $user_type_name.replace(/ /g,"_");
+    $('#user_type_code').val($user_type_code).toLowerCase();
 })
 
 function validateForm(){
-    $category_id = $('#category_id').val();
-    $category_name = $('#category_name').val().replace(/^\s+|\s+$/gm,'');
-    $category_slug = $('#category_slug').val().replace(/^\s+|\s+$/gm,'');
-    $activity_status = $('#activity_status').val();
+    $user_type_id = $('#user_type_id').val();
+    $user_type_name = $('#user_type_name').val().replace(/^\s+|\s+$/gm,'');
+    $user_type_code = $('#user_type_code').val().replace(/^\s+|\s+$/gm,'');
+    $user_type_status = $('#user_type_status').val();
     $status = true;
 
-    if($category_name == ''){
+    if($user_type_name == ''){
         $status = false;
-        $('#category_name').removeClass('is-valid');
-        $('#category_name').addClass('is-invalid');
+        $('#user_type_name').removeClass('is-valid');
+        $('#user_type_name').addClass('is-invalid');
     }else{
-        $('#category_name').removeClass('is-invalid');
-        $('#category_name').addClass('is-valid');
+        $('#user_type_name').removeClass('is-invalid');
+        $('#user_type_name').addClass('is-valid');
     }   
 
-    if($category_slug == ''){
+    if($user_type_code == ''){
         $status = false;
-        $('#category_slug').removeClass('is-valid');
-        $('#category_slug').addClass('is-invalid');
+        $('#user_type_code').removeClass('is-valid');
+        $('#user_type_code').addClass('is-invalid');
     }else{
-        $('#category_slug').removeClass('is-invalid');
-        $('#category_slug').addClass('is-valid');
+        $('#user_type_code').removeClass('is-invalid');
+        $('#user_type_code').addClass('is-valid');
     }  
 
     $('#submitForm_spinner').hide();
@@ -49,12 +53,12 @@ $('#submitForm').click(function(){
 
         if($formVallidStatus == true){
             $published = $('#published').val();
-            $category_id = $('#category_id').val();
+            $user_type_id = $('#user_type_id').val();
 
             $.ajax({
                 method: "POST",
                 url: "setup/user_type/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, category_name: $category_name, category_slug: $category_slug, activity_status: $activity_status }
+                data: { fn: "saveFormData", user_type_id: $user_type_id, user_type_name: $user_type_name, user_type_code: $user_type_code, user_type_status: $user_type_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -76,23 +80,23 @@ $('#submitForm').click(function(){
     }, 500)    
 })
 
-function editTableData($category_id){
+function editTableData($user_type_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
 
     $.ajax({
         method: "POST",
         url: "setup/user_type/function.php",
-        data: { fn: "getFormEditData", category_id: $category_id }
+        data: { fn: "getFormEditData", user_type_id: $user_type_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){ 
-            $('#category_name').val($res1.category_name);  
-            $('#category_slug').val($res1.category_slug); 
-            $('#activity_status').val($res1.activity_status).trigger('change');   
-            $('#category_id').val($res1.category_id);
+            $('#user_type_name').val($res1.user_type_name);  
+            $('#user_type_code').val($res1.user_type_code); 
+            $('#user_type_status').val($res1.user_type_status).trigger('change');   
+            $('#user_type_id').val($res1.user_type_id);
 
             $('#exampleModalLong').modal('show');
         }
@@ -101,12 +105,12 @@ function editTableData($category_id){
 }
 
 //Delete function	
-function deleteTableData($category_id){
+function deleteTableData($user_type_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
             url: "setup/user_type/function.php",
-            data: { fn: "deleteTableData", category_id: $category_id }
+            data: { fn: "deleteTableData", user_type_id: $user_type_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -196,14 +200,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#user_type_id').html('');
+                $option_user_type_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $option_user_type_id += "<option data-user_type_code='"+$rows[$i].user_type_code+"' value='"+$rows[$i].user_type_id+"'>"+$rows[$i].user_type_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#user_type_id').html($option_user_type_id);
             }//end if
         }        
     });//end ajax
@@ -222,14 +226,14 @@ function configureAuthorDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_name').html('');
-                $option_category_name = "<option value='0'>Select</option>";
+                $('#user_type_name').html('');
+                $option_user_type_name = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_name += "<option value='"+$rows[$i].category_name+"'>"+$rows[$i].author_name+"</option>";                    
+                    $option_user_type_name += "<option value='"+$rows[$i].user_type_name+"'>"+$rows[$i].author_name+"</option>";                    
                 }//end for
                 
-                $('#category_name').html($option_category_name);
+                $('#user_type_name').html($option_user_type_name);
             }//end if
         }        
     });//end ajax

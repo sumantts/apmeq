@@ -2,35 +2,35 @@ $('#onMyModal').on('click', function(){
     $('#exampleModalLong').modal('show');
 })
 
-$('#category_name').on('blur', function(){
-    $category_name = $('#category_name').val();
-    $category_slug = $category_name.replace(/ /g,"_");
-    $('#category_slug').val($category_slug).toLowerCase();
+$('#hospital_name').on('blur', function(){
+    $hospital_name = $('#hospital_name').val();
+    $hospital_code = $hospital_name.replace(/ /g,"_");
+    $('#hospital_code').val($hospital_code).toLowerCase();
 })
 
 function validateForm(){
-    $category_id = $('#category_id').val();
-    $category_name = $('#category_name').val().replace(/^\s+|\s+$/gm,'');
-    $category_slug = $('#category_slug').val().replace(/^\s+|\s+$/gm,'');
-    $activity_status = $('#activity_status').val();
+    $hospital_id = $('#hospital_id').val();
+    $hospital_name = $('#hospital_name').val().replace(/^\s+|\s+$/gm,'');
+    $hospital_code = $('#hospital_code').val().replace(/^\s+|\s+$/gm,'');
+    $hospital_status = $('#hospital_status').val();
     $status = true;
 
-    if($category_name == ''){
+    if($hospital_name == ''){
         $status = false;
-        $('#category_name').removeClass('is-valid');
-        $('#category_name').addClass('is-invalid');
+        $('#hospital_name').removeClass('is-valid');
+        $('#hospital_name').addClass('is-invalid');
     }else{
-        $('#category_name').removeClass('is-invalid');
-        $('#category_name').addClass('is-valid');
+        $('#hospital_name').removeClass('is-invalid');
+        $('#hospital_name').addClass('is-valid');
     }   
 
-    if($category_slug == ''){
+    if($hospital_code == ''){
         $status = false;
-        $('#category_slug').removeClass('is-valid');
-        $('#category_slug').addClass('is-invalid');
+        $('#hospital_code').removeClass('is-valid');
+        $('#hospital_code').addClass('is-invalid');
     }else{
-        $('#category_slug').removeClass('is-invalid');
-        $('#category_slug').addClass('is-valid');
+        $('#hospital_code').removeClass('is-invalid');
+        $('#hospital_code').addClass('is-valid');
     }  
 
     $('#submitForm_spinner').hide();
@@ -44,17 +44,17 @@ $('#submitForm').click(function(){
     $('#submitForm_spinner').show();
     $('#submitForm_spinner_text').show();
     $('#submitForm_text').hide();
-    setTimeout(function(){
+    //setTimeout(function(){
         $formVallidStatus = validateForm();
 
-        if($formVallidStatus == true){
-            $published = $('#published').val();
-            $category_id = $('#category_id').val();
+        if($formVallidStatus == true){ 
+            $hospital_id = $('#hospital_id').val();
+            $hospital_address = $('#hospital_address').val();
 
             $.ajax({
                 method: "POST",
                 url: "setup/hospital_details/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, category_name: $category_name, category_slug: $category_slug, activity_status: $activity_status }
+                data: { fn: "saveFormData", hospital_id: $hospital_id, hospital_name: $hospital_name, hospital_code: $hospital_code, hospital_status: $hospital_status, hospital_address: $hospital_address }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -73,26 +73,27 @@ $('#submitForm').click(function(){
             });//end ajax
         }
 
-    }, 500)    
+    //}, 500)    
 })
 
-function editTableData($category_id){
+function editTableData($hospital_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
 
     $.ajax({
         method: "POST",
         url: "setup/hospital_details/function.php",
-        data: { fn: "getFormEditData", category_id: $category_id }
+        data: { fn: "getFormEditData", hospital_id: $hospital_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){ 
-            $('#category_name').val($res1.category_name);  
-            $('#category_slug').val($res1.category_slug); 
-            $('#activity_status').val($res1.activity_status).trigger('change');   
-            $('#category_id').val($res1.category_id);
+            $('#hospital_name').val($res1.hospital_name);  
+            $('#hospital_code').val($res1.hospital_code); 
+            $('#hospital_status').val($res1.hospital_status).trigger('change');   
+            $('#hospital_address').val($res1.hospital_address);
+            $('#hospital_id').val($res1.hospital_id);
 
             $('#exampleModalLong').modal('show');
         }
@@ -101,12 +102,12 @@ function editTableData($category_id){
 }
 
 //Delete function	
-function deleteTableData($category_id){
+function deleteTableData($hospital_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
             url: "setup/hospital_details/function.php",
-            data: { fn: "deleteTableData", category_id: $category_id }
+            data: { fn: "deleteTableData", hospital_id: $hospital_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -196,14 +197,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#hospital_id').html('');
+                $option_hospital_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $option_hospital_id += "<option data-hospital_code='"+$rows[$i].hospital_code+"' value='"+$rows[$i].hospital_id+"'>"+$rows[$i].hospital_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#hospital_id').html($option_hospital_id);
             }//end if
         }        
     });//end ajax
@@ -222,14 +223,14 @@ function configureAuthorDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_name').html('');
-                $option_category_name = "<option value='0'>Select</option>";
+                $('#hospital_name').html('');
+                $option_hospital_name = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_name += "<option value='"+$rows[$i].category_name+"'>"+$rows[$i].author_name+"</option>";                    
+                    $option_hospital_name += "<option value='"+$rows[$i].hospital_name+"'>"+$rows[$i].author_name+"</option>";                    
                 }//end for
                 
-                $('#category_name').html($option_category_name);
+                $('#hospital_name').html($option_hospital_name);
             }//end if
         }        
     });//end ajax

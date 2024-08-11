@@ -13,19 +13,19 @@
 		$return_result = array();
 		$status = true;
 
-		$category_id = $_POST["category_id"];		
-		$category_name = $_POST["category_name"];		
-		$category_slug = strtolower($_POST["category_slug"]);		
-		$activity_status = $_POST["activity_status"];
+		$department_id = $_POST["department_id"];		
+		$department_name = $_POST["department_name"];		
+		$department_code = $_POST["department_code"];		
+		$department_status = $_POST["department_status"];
 		
 		try {
-			if($category_id > 0){
+			if($department_id > 0){
 				$status = true;
-				$sql = "UPDATE category_list SET category_name = '" .$category_name. "', category_slug = '" .$category_slug. "', activity_status = '" .$activity_status. "' WHERE category_id = '" .$category_id. "' ";
+				$sql = "UPDATE department_list SET department_name = '" .$department_name. "', department_code = '" .$department_code. "', department_status = '" .$department_status. "' WHERE department_id = '" .$department_id. "' ";
 				$result = $mysqli->query($sql);
 			}else{
 				$status = true;
-				$sql = "INSERT INTO category_list (category_name, category_slug, activity_status) VALUES ('".$category_name."','".$category_slug."', '".$activity_status."')";
+				$sql = "INSERT INTO department_list (department_name, department_code, department_status) VALUES ('".$department_name."','".$department_code."', '".$department_status."')";
 				$result = $mysqli->query($sql);
 			}
 				
@@ -33,7 +33,7 @@
 			die("Error occurred:" . $e->getMessage());
 		}
 		$return_result['status'] = $status;
-		sleep(2);
+		//sleep(2);
 		echo json_encode($return_result);
 	}//Save function end	
 
@@ -43,23 +43,23 @@
 		$status = true;
 		$mainData = array();
 		$author_bio1 = '';
-		$sql = "SELECT * FROM category_list ORDER BY category_name";
+		$sql = "SELECT * FROM department_list ORDER BY department_name";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;
 			$slno = 1;
 			while($row = $result->fetch_array()){
-				$category_id = $row['category_id'];		
-				$category_name = $row['category_name'];	
-				$category_slug = $row['category_slug'];		
-				$activity_status = $row['activity_status'];	
+				$department_id = $row['department_id'];		
+				$department_name = $row['department_name'];	
+				$department_code = $row['department_code'];		
+				$department_status = $row['department_status'];	
 
 				$data[0] = $slno;
-				$data[1] = $category_name;
-				$data[2] = $category_slug;
-				$data[3] =  ucfirst($activity_status);
-				$data[4] = "<a href='javascript: void(0)' data-category_id='.$category_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$category_id.")'></i></a> <a href='javascript: void(0)' data-category_id='.$category_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$category_id.")'></i></a>";
+				$data[1] = $department_name;
+				$data[2] = $department_code;
+				$data[3] =  $activity_status[$department_status];
+				$data[4] = "<a href='javascript: void(0)' data-department_id='.$department_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$department_id.")'></i></a> <a href='javascript: void(0)' data-department_id='.$department_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$department_id.")'></i></a>";
 
 				array_push($mainData, $data);
 				$slno++;
@@ -78,28 +78,28 @@
 		$return_array = array();
 		$status = true;
 		$mainData = array();
-		$category_id = $_POST['category_id'];
+		$department_id = $_POST['department_id'];
 
-		$sql = "SELECT * FROM category_list WHERE category_id = '" .$category_id. "' ";
+		$sql = "SELECT * FROM department_list WHERE department_id = '" .$department_id. "' ";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;	
 			$row = $result->fetch_array();
 			
-			$category_id = $row['category_id'];		
-			$category_name = $row['category_name'];	
-			$category_slug = $row['category_slug'];		
-			$activity_status = $row['activity_status'];	
+			$department_id = $row['department_id'];		
+			$department_name = $row['department_name'];	
+			$department_code = $row['department_code'];		
+			$department_status = $row['department_status'];	
 		} else {
 			$status = false;
 		}
 		//$mysqli->close();
 			
-		$return_array['category_id'] = $category_id;
-		$return_array['category_name'] = $category_name;
-		$return_array['category_slug'] = $category_slug;
-		$return_array['activity_status'] = $activity_status;
+		$return_array['department_id'] = $department_id;
+		$return_array['department_name'] = $department_name;
+		$return_array['department_code'] = $department_code;
+		$return_array['department_status'] = $department_status;
 
 		$return_array['status'] = $status;
     	echo json_encode($return_array);
@@ -108,13 +108,13 @@
 	//Delete function
 	if($fn == 'deleteTableData'){
 		$return_result = array();
-		$category_id = $_POST["category_id"];
+		$department_id = $_POST["department_id"];
 		$status = true;	
 
-		$sql = "DELETE FROM category_list WHERE category_id = '".$category_id."'";
+		$sql = "DELETE FROM department_list WHERE department_id = '".$department_id."'";
 		$result = $mysqli->query($sql);
 		$return_result['status'] = $status;
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function deleteItem
 
@@ -124,21 +124,21 @@
 		$status = true;
 		$mainData = array();
 
-		$sql = "SELECT * FROM category_list WHERE activity_status = 'active' ORDER BY category_name ASC";
+		$sql = "SELECT * FROM department_list WHERE department_status = 'active' ORDER BY department_name ASC";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;
 			$slno = 1;
 			while($row = $result->fetch_array()){
-				$category_id = $row['category_id'];	
-				$category_name = $row['category_name'];			
-				$category_slug = $row['category_slug'];
+				$department_id = $row['department_id'];	
+				$department_name = $row['department_name'];			
+				$department_code = $row['department_code'];
 				$data = new stdClass();
 
-				$data->category_id = $category_id;
-				$data->category_name = $category_name;
-				$data->category_slug = $category_slug;
+				$data->department_id = $department_id;
+				$data->department_name = $department_name;
+				$data->department_code = $department_code;
 				
 				array_push($mainData, $data);
 				$slno++;

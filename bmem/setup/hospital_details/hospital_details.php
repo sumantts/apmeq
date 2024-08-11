@@ -3,7 +3,7 @@ if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=si
 include('common/head.php'); ?>
 
 <style>
-    table td {
+    /*table td {
         word-break: break-word;
         vertical-align: top;
         white-space: normal !important;
@@ -11,7 +11,7 @@ include('common/head.php'); ?>
 
     .myclass {
         text-transform: lowercase;
-    }
+    }*/
 </style>
 
 <body class="">
@@ -77,18 +77,20 @@ include('common/head.php'); ?>
                                 <thead>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Hospita Name</th>
+                                        <th>Hospita Code</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>Hospita Name</th>
+                                        <th>Hospita Code</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -111,34 +113,38 @@ include('common/head.php'); ?>
                             <form class="needs-validation" novalidate id="myForm" name="myForm">
                                 <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_name">Department Name</label>
-                                        <input type="text" class="form-control" name="category_name" id="category_name">
+                                        <label for="hospital_name" class="text-danger">Hospita Name*</label>
+                                        <input type="text" class="form-control" name="hospital_name" id="hospital_name">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Name.
+                                            Please provide Hospita Name.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_slug">Slug</label>
-                                        <input type="text" class="form-control myclass" name="category_slug" id="category_slug" readonly>
+                                        <label for="hospital_code" class="text-danger">Hospita Code*</label>
+                                        <input type="text" class="form-control myclass" name="hospital_code" id="hospital_code">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Slug.
+                                            Please provide Hospita Code.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="activity_status">Active</label>
-                                        <select class="form-control" name="activity_status" id="activity_status">
-                                            <option value="inactive">Inactive</option>
-                                            <option value="active">Active</option>
+                                        <label for="hospital_status">Status</label>
+                                        <select class="form-control" name="hospital_status" id="hospital_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
-                                        <input type="hidden" name="category_id" id="category_id" value="0">
+                                    </div> 
+
+                                    <div class="col-md-12 mb-3">
+                                        <label for="hospital_address">Address</label>
+                                        <textarea class="form-control" name="hospital_address" id="hospital_address"> </textarea> 
                                     </div> 
                                 </div> 
                             </form>
@@ -146,6 +152,7 @@ include('common/head.php'); ?>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            <input type="hidden" name="hospital_id" id="hospital_id" value="0">
                             <button class="btn  btn-primary" type="button" id="submitForm">
                                 <span class="spinner-border spinner-border-sm" role="status" style="display: none;" id="submitForm_spinner"></span>
                                 <span class="load-text" style="display: none;" id="submitForm_spinner_text">Loading...</span>

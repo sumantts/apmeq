@@ -2,17 +2,6 @@
 if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php'); ?>
 
-<style>
-    table td {
-        word-break: break-word;
-        vertical-align: top;
-        white-space: normal !important;
-    }
-
-    .myclass {
-        text-transform: lowercase;
-    }
-</style>
 
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -77,18 +66,18 @@ include('common/head.php'); ?>
                                 <thead>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>User Type</th>
+                                        <th>User Type Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Department Name</th>
-                                        <th>Slug</th>
-                                        <th>Active</th>
+                                        <th>User Type</th>
+                                        <th>User Type Code</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -111,34 +100,34 @@ include('common/head.php'); ?>
                             <form class="needs-validation" novalidate id="myForm" name="myForm">
                                 <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_name">Department Name</label>
-                                        <input type="text" class="form-control" name="category_name" id="category_name">
+                                        <label for="user_type_name" class="text-danger">User Type*</label>
+                                        <input type="text" class="form-control" name="user_type_name" id="user_type_name">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Name.
+                                            Please provide User Type.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_slug">Slug</label>
-                                        <input type="text" class="form-control myclass" name="category_slug" id="category_slug" readonly>
+                                        <label for="user_type_code" class="text-danger">User Type Code*</label>
+                                        <input type="text" class="form-control myclass" name="user_type_code" id="user_type_code">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Department Slug.
+                                            Please provide User Type Code.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="activity_status">Active</label>
-                                        <select class="form-control" name="activity_status" id="activity_status">
-                                            <option value="inactive">Inactive</option>
-                                            <option value="active">Active</option>
+                                        <label for="user_type_status">Status</label>
+                                        <select class="form-control" name="user_type_status" id="user_type_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
-                                        <input type="hidden" name="category_id" id="category_id" value="0">
+                                        <input type="hidden" name="user_type_id" id="user_type_id" value="0">
                                     </div> 
                                 </div> 
                             </form>

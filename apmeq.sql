@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2024 at 03:23 PM
+-- Generation Time: Aug 11, 2024 at 07:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,7 +85,8 @@ CREATE TABLE `asset_type_list` (
 --
 
 INSERT INTO `asset_type_list` (`asset_type_id`, `asset_type_name`, `asset_type_code`, `asset_type_status`) VALUES
-(1, 'Tangible assets', 'TA', 1);
+(1, 'Tangible Assets', 'Tangible_Assets', 1),
+(2, 'Nontangible Assets', 'Nontangible_Assets', 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,8 @@ CREATE TABLE `department_list` (
 --
 
 INSERT INTO `department_list` (`department_id`, `department_name`, `department_code`, `department_status`) VALUES
-(1, 'Information Technology', 'IT', 1);
+(1, 'Information Technology', 'IT', 1),
+(3, 'Electrical', 'Electrical', 1);
 
 -- --------------------------------------------------------
 
@@ -187,7 +189,8 @@ CREATE TABLE `hospital_list` (
 --
 
 INSERT INTO `hospital_list` (`hospital_id`, `hospital_name`, `hospital_code`, `hospital_address`, `hospital_status`) VALUES
-(1, 'Uluberia Hospital', 'ULU001', 'Uluberia', 1);
+(1, 'Uluberia Hospital', 'ULU001', '', 1),
+(2, 'Bagnan Hospital', 'BAG001', 'P.S - Bagnan ', 1);
 
 -- --------------------------------------------------------
 
@@ -313,8 +316,8 @@ INSERT INTO `supplier_list` (`supplier_id`, `supplier_name`, `supplier_code`, `p
 --
 
 CREATE TABLE `user_details` (
-  `user_details_id` int(11) NOT NULL,
-  `user_details_name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
   `user_type_id` int(11) NOT NULL COMMENT 'PK of user_type',
   `hospital_id` int(11) NOT NULL COMMENT 'PK of hospital_list',
   `user_mobile` varchar(10) NOT NULL,
@@ -324,14 +327,14 @@ CREATE TABLE `user_details` (
   `user_address` text NOT NULL,
   `user_user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
-  `user_details_status` tinyint(1) NOT NULL DEFAULT 1
+  `user_status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_details`
 --
 
-INSERT INTO `user_details` (`user_details_id`, `user_details_name`, `user_type_id`, `hospital_id`, `user_mobile`, `user_phone`, `user_email`, `user_dob`, `user_address`, `user_user_name`, `user_password`, `user_details_status`) VALUES
+INSERT INTO `user_details` (`user_id`, `user_name`, `user_type_id`, `hospital_id`, `user_mobile`, `user_phone`, `user_email`, `user_dob`, `user_address`, `user_user_name`, `user_password`, `user_status`) VALUES
 (1, 'Suman Jana', 1, 1, '9733935161', '256789', 'sumanjana.6@gmail.com', '1987-10-01', 'Bagnan', 'sumanjana.6@gmail.com', '12345678', 1);
 
 -- --------------------------------------------------------
@@ -352,7 +355,8 @@ CREATE TABLE `user_type` (
 --
 
 INSERT INTO `user_type` (`user_type_id`, `user_type_name`, `user_type_code`, `user_type_status`) VALUES
-(1, 'Super Admin', 'super', 1);
+(1, 'Super Admin', 'super', 1),
+(2, 'Hospital Admin', 'Hospital_Admin', 1);
 
 --
 -- Indexes for dumped tables
@@ -428,7 +432,7 @@ ALTER TABLE `supplier_list`
 -- Indexes for table `user_details`
 --
 ALTER TABLE `user_details`
-  ADD PRIMARY KEY (`user_details_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `user_type`
@@ -450,7 +454,7 @@ ALTER TABLE `asset_details`
 -- AUTO_INCREMENT for table `asset_type_list`
 --
 ALTER TABLE `asset_type_list`
-  MODIFY `asset_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `asset_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `author_details`
@@ -468,13 +472,13 @@ ALTER TABLE `category_list`
 -- AUTO_INCREMENT for table `department_list`
 --
 ALTER TABLE `department_list`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hospital_list`
 --
 ALTER TABLE `hospital_list`
-  MODIFY `hospital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `hospital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `introduction`
@@ -510,13 +514,13 @@ ALTER TABLE `supplier_list`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `user_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_type`
 --
 ALTER TABLE `user_type`
-  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

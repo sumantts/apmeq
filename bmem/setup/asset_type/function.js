@@ -1,36 +1,40 @@
 $('#onMyModal').on('click', function(){
+    $('#asset_type_id').val('0');
+    $('#asset_type_name').val('');
+    $('#asset_type_code').val('');
+    $('#asset_type_status').val('1').trigger('change');
     $('#exampleModalLong').modal('show');
 })
 
-$('#category_name').on('blur', function(){
-    $category_name = $('#category_name').val();
-    $category_slug = $category_name.replace(/ /g,"_");
-    $('#category_slug').val($category_slug).toLowerCase();
+$('#asset_type_name').on('blur', function(){
+    $asset_type_name = $('#asset_type_name').val();
+    $asset_type_code = $asset_type_name.replace(/ /g,"_");
+    $('#asset_type_code').val($asset_type_code).toLowerCase();
 })
 
 function validateForm(){
-    $category_id = $('#category_id').val();
-    $category_name = $('#category_name').val().replace(/^\s+|\s+$/gm,'');
-    $category_slug = $('#category_slug').val().replace(/^\s+|\s+$/gm,'');
-    $activity_status = $('#activity_status').val();
+    $asset_type_id = $('#asset_type_id').val();
+    $asset_type_name = $('#asset_type_name').val().replace(/^\s+|\s+$/gm,'');
+    $asset_type_code = $('#asset_type_code').val().replace(/^\s+|\s+$/gm,'');
+    $asset_type_status = $('#asset_type_status').val();
     $status = true;
 
-    if($category_name == ''){
+    if($asset_type_name == ''){
         $status = false;
-        $('#category_name').removeClass('is-valid');
-        $('#category_name').addClass('is-invalid');
+        $('#asset_type_name').removeClass('is-valid');
+        $('#asset_type_name').addClass('is-invalid');
     }else{
-        $('#category_name').removeClass('is-invalid');
-        $('#category_name').addClass('is-valid');
+        $('#asset_type_name').removeClass('is-invalid');
+        $('#asset_type_name').addClass('is-valid');
     }   
 
-    if($category_slug == ''){
+    if($asset_type_code == ''){
         $status = false;
-        $('#category_slug').removeClass('is-valid');
-        $('#category_slug').addClass('is-invalid');
+        $('#asset_type_code').removeClass('is-valid');
+        $('#asset_type_code').addClass('is-invalid');
     }else{
-        $('#category_slug').removeClass('is-invalid');
-        $('#category_slug').addClass('is-valid');
+        $('#asset_type_code').removeClass('is-invalid');
+        $('#asset_type_code').addClass('is-valid');
     }  
 
     $('#submitForm_spinner').hide();
@@ -44,17 +48,17 @@ $('#submitForm').click(function(){
     $('#submitForm_spinner').show();
     $('#submitForm_spinner_text').show();
     $('#submitForm_text').hide();
-    setTimeout(function(){
+    //setTimeout(function(){
         $formVallidStatus = validateForm();
 
         if($formVallidStatus == true){
             $published = $('#published').val();
-            $category_id = $('#category_id').val();
+            $asset_type_id = $('#asset_type_id').val();
 
             $.ajax({
                 method: "POST",
                 url: "setup/asset_type/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, category_name: $category_name, category_slug: $category_slug, activity_status: $activity_status }
+                data: { fn: "saveFormData", asset_type_id: $asset_type_id, asset_type_name: $asset_type_name, asset_type_code: $asset_type_code, asset_type_status: $asset_type_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -73,26 +77,26 @@ $('#submitForm').click(function(){
             });//end ajax
         }
 
-    }, 500)    
+    //}, 500)    
 })
 
-function editTableData($category_id){
+function editTableData($asset_type_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
 
     $.ajax({
         method: "POST",
         url: "setup/asset_type/function.php",
-        data: { fn: "getFormEditData", category_id: $category_id }
+        data: { fn: "getFormEditData", asset_type_id: $asset_type_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){ 
-            $('#category_name').val($res1.category_name);  
-            $('#category_slug').val($res1.category_slug); 
-            $('#activity_status').val($res1.activity_status).trigger('change');   
-            $('#category_id').val($res1.category_id);
+            $('#asset_type_name').val($res1.asset_type_name);  
+            $('#asset_type_code').val($res1.asset_type_code); 
+            $('#asset_type_status').val($res1.asset_type_status).trigger('change');   
+            $('#asset_type_id').val($res1.asset_type_id);
 
             $('#exampleModalLong').modal('show');
         }
@@ -101,12 +105,12 @@ function editTableData($category_id){
 }
 
 //Delete function	
-function deleteTableData($category_id){
+function deleteTableData($asset_type_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
             url: "setup/asset_type/function.php",
-            data: { fn: "deleteTableData", category_id: $category_id }
+            data: { fn: "deleteTableData", asset_type_id: $asset_type_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -196,14 +200,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#asset_type_id').html('');
+                $option_asset_type_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $option_asset_type_id += "<option data-asset_type_code='"+$rows[$i].asset_type_code+"' value='"+$rows[$i].asset_type_id+"'>"+$rows[$i].asset_type_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#asset_type_id').html($option_asset_type_id);
             }//end if
         }        
     });//end ajax
@@ -222,14 +226,14 @@ function configureAuthorDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_name').html('');
-                $option_category_name = "<option value='0'>Select</option>";
+                $('#asset_type_name').html('');
+                $option_asset_type_name = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_name += "<option value='"+$rows[$i].category_name+"'>"+$rows[$i].author_name+"</option>";                    
+                    $option_asset_type_name += "<option value='"+$rows[$i].asset_type_name+"'>"+$rows[$i].author_name+"</option>";                    
                 }//end for
                 
-                $('#category_name').html($option_category_name);
+                $('#asset_type_name').html($option_asset_type_name);
             }//end if
         }        
     });//end ajax
