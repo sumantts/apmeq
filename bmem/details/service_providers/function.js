@@ -1,36 +1,54 @@
 $('#onMyModal').on('click', function(){
+    $('#service_providers_id').val('0');
+    $('#service_providers_name').val('');
+    $('#service_providers_code').val('');
+    $('#primary_contact_number').val('');
+    $('#secondary_contact_number').val('');
+
+    $service_providers_status = $('#service_providers_status').val();
     $('#exampleModalLong').modal('show');
 })
 
-$('#category_name').on('blur', function(){
-    $category_name = $('#category_name').val();
-    $category_slug = $category_name.replace(/ /g,"_");
-    $('#category_slug').val($category_slug).toLowerCase();
+$('#service_providers_name').on('blur', function(){
+    $service_providers_name = $('#service_providers_name').val();
+    $service_providers_code = $service_providers_name.replace(/ /g,"_");
+    $('#service_providers_code').val($service_providers_code).toLowerCase();
 })
 
 function validateForm(){
-    $category_id = $('#category_id').val();
-    $category_name = $('#category_name').val().replace(/^\s+|\s+$/gm,'');
-    $category_slug = $('#category_slug').val().replace(/^\s+|\s+$/gm,'');
-    $activity_status = $('#activity_status').val();
+    $service_providers_id = $('#service_providers_id').val();
+    $service_providers_name = $('#service_providers_name').val().replace(/^\s+|\s+$/gm,'');
+    $service_providers_code = $('#service_providers_code').val().replace(/^\s+|\s+$/gm,'');
+    $primary_contact_number = $('#primary_contact_number').val().replace(/^\s+|\s+$/gm,'');
+    $secondary_contact_number = $('#secondary_contact_number').val().replace(/^\s+|\s+$/gm,'');
+    $service_providers_status = $('#service_providers_status').val();
     $status = true;
 
-    if($category_name == ''){
+    if($service_providers_name == ''){
         $status = false;
-        $('#category_name').removeClass('is-valid');
-        $('#category_name').addClass('is-invalid');
+        $('#service_providers_name').removeClass('is-valid');
+        $('#service_providers_name').addClass('is-invalid');
     }else{
-        $('#category_name').removeClass('is-invalid');
-        $('#category_name').addClass('is-valid');
+        $('#service_providers_name').removeClass('is-invalid');
+        $('#service_providers_name').addClass('is-valid');
     }   
 
-    if($category_slug == ''){
+    if($service_providers_code == ''){
         $status = false;
-        $('#category_slug').removeClass('is-valid');
-        $('#category_slug').addClass('is-invalid');
+        $('#service_providers_code').removeClass('is-valid');
+        $('#service_providers_code').addClass('is-invalid');
     }else{
-        $('#category_slug').removeClass('is-invalid');
-        $('#category_slug').addClass('is-valid');
+        $('#service_providers_code').removeClass('is-invalid');
+        $('#service_providers_code').addClass('is-valid');
+    }   
+
+    if($primary_contact_number == ''){
+        $status = false;
+        $('#primary_contact_number').removeClass('is-valid');
+        $('#primary_contact_number').addClass('is-invalid');
+    }else{
+        $('#primary_contact_number').removeClass('is-invalid');
+        $('#primary_contact_number').addClass('is-valid');
     }  
 
     $('#submitForm_spinner').hide();
@@ -44,17 +62,17 @@ $('#submitForm').click(function(){
     $('#submitForm_spinner').show();
     $('#submitForm_spinner_text').show();
     $('#submitForm_text').hide();
-    setTimeout(function(){
+    //setTimeout(function(){
         $formVallidStatus = validateForm();
 
         if($formVallidStatus == true){
             $published = $('#published').val();
-            $category_id = $('#category_id').val();
+            $service_providers_id = $('#service_providers_id').val();
 
             $.ajax({
                 method: "POST",
                 url: "details/service_providers/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, category_name: $category_name, category_slug: $category_slug, activity_status: $activity_status }
+                data: { fn: "saveFormData", service_providers_id: $service_providers_id, service_providers_name: $service_providers_name, service_providers_code: $service_providers_code, primary_contact_number: $primary_contact_number, secondary_contact_number: $secondary_contact_number, service_providers_status: $service_providers_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -73,26 +91,28 @@ $('#submitForm').click(function(){
             });//end ajax
         }
 
-    }, 500)    
+    //}, 500)    
 })
 
-function editTableData($category_id){
+function editTableData($service_providers_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
 
     $.ajax({
         method: "POST",
         url: "details/service_providers/function.php",
-        data: { fn: "getFormEditData", category_id: $category_id }
+        data: { fn: "getFormEditData", service_providers_id: $service_providers_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){ 
-            $('#category_name').val($res1.category_name);  
-            $('#category_slug').val($res1.category_slug); 
-            $('#activity_status').val($res1.activity_status).trigger('change');   
-            $('#category_id').val($res1.category_id);
+            $('#service_providers_name').val($res1.service_providers_name);  
+            $('#service_providers_code').val($res1.service_providers_code); 
+            $('#primary_contact_number').val($res1.primary_contact_number); 
+            $('#secondary_contact_number').val($res1.secondary_contact_number); 
+            $('#service_providers_status').val($res1.service_providers_status).trigger('change');   
+            $('#service_providers_id').val($res1.service_providers_id);
 
             $('#exampleModalLong').modal('show');
         }
@@ -101,12 +121,12 @@ function editTableData($category_id){
 }
 
 //Delete function	
-function deleteTableData($category_id){
+function deleteTableData($service_providers_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
             url: "details/service_providers/function.php",
-            data: { fn: "deleteTableData", category_id: $category_id }
+            data: { fn: "deleteTableData", service_providers_id: $service_providers_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -183,6 +203,7 @@ function populateDataTable(){
     });
 }//end fun
 
+/*
 function configureCategoryDropDown(){
     $.ajax({
         method: "POST",
@@ -196,14 +217,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#service_providers_id').html('');
+                $option_service_providers_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $option_service_providers_id += "<option data-service_providers_code='"+$rows[$i].service_providers_code+"' value='"+$rows[$i].service_providers_id+"'>"+$rows[$i].service_providers_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#service_providers_id').html($option_service_providers_id);
             }//end if
         }        
     });//end ajax
@@ -222,18 +243,19 @@ function configureAuthorDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_name').html('');
-                $option_category_name = "<option value='0'>Select</option>";
+                $('#service_providers_name').html('');
+                $option_service_providers_name = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_name += "<option value='"+$rows[$i].category_name+"'>"+$rows[$i].author_name+"</option>";                    
+                    $option_service_providers_name += "<option value='"+$rows[$i].service_providers_name+"'>"+$rows[$i].author_name+"</option>";                    
                 }//end for
                 
-                $('#category_name').html($option_category_name);
+                $('#service_providers_name').html($option_service_providers_name);
             }//end if
         }        
     });//end ajax
 }//end
+*/
 
 $(document).ready(function () {
     populateDataTable();
