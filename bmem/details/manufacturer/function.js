@@ -1,45 +1,45 @@
 $('#onMyModal').on('click', function(){
-    $('#supplier_id').val('0');
-    $('#supplier_name').val('');
-    $('#supplier_code').val('');
+    $('#manufacturer_id').val('0');
+    $('#manufacturer_name').val('');
+    $('#manufacturer_code').val('');
     $('#primary_contact_number').val('');
     $('#secondary_contact_number').val('');
 
-    $supplier_status = $('#supplier_status').val();
+    $manufacturer_status = $('#manufacturer_status').val();
     $('#exampleModalLong').modal('show');
 })
 
-$('#supplier_name').on('blur', function(){
-    $supplier_name = $('#supplier_name').val();
-    $supplier_code = $supplier_name.replace(/ /g,"_");
-    $('#supplier_code').val($supplier_code).toLowerCase();
+$('#manufacturer_name').on('blur', function(){
+    $manufacturer_name = $('#manufacturer_name').val();
+    $manufacturer_code = $manufacturer_name.replace(/ /g,"_");
+    $('#manufacturer_code').val($manufacturer_code).toLowerCase();
 })
 
 function validateForm(){
-    $supplier_id = $('#supplier_id').val();
-    $supplier_name = $('#supplier_name').val().replace(/^\s+|\s+$/gm,'');
-    $supplier_code = $('#supplier_code').val().replace(/^\s+|\s+$/gm,'');
+    $manufacturer_id = $('#manufacturer_id').val();
+    $manufacturer_name = $('#manufacturer_name').val().replace(/^\s+|\s+$/gm,'');
+    $manufacturer_code = $('#manufacturer_code').val().replace(/^\s+|\s+$/gm,'');
     $primary_contact_number = $('#primary_contact_number').val().replace(/^\s+|\s+$/gm,'');
     $secondary_contact_number = $('#secondary_contact_number').val().replace(/^\s+|\s+$/gm,'');
-    $supplier_status = $('#supplier_status').val();
+    $manufacturer_status = $('#manufacturer_status').val();
     $status = true;
 
-    if($supplier_name == ''){
+    if($manufacturer_name == ''){
         $status = false;
-        $('#supplier_name').removeClass('is-valid');
-        $('#supplier_name').addClass('is-invalid');
+        $('#manufacturer_name').removeClass('is-valid');
+        $('#manufacturer_name').addClass('is-invalid');
     }else{
-        $('#supplier_name').removeClass('is-invalid');
-        $('#supplier_name').addClass('is-valid');
+        $('#manufacturer_name').removeClass('is-invalid');
+        $('#manufacturer_name').addClass('is-valid');
     }   
 
-    if($supplier_code == ''){
+    if($manufacturer_code == ''){
         $status = false;
-        $('#supplier_code').removeClass('is-valid');
-        $('#supplier_code').addClass('is-invalid');
+        $('#manufacturer_code').removeClass('is-valid');
+        $('#manufacturer_code').addClass('is-invalid');
     }else{
-        $('#supplier_code').removeClass('is-invalid');
-        $('#supplier_code').addClass('is-valid');
+        $('#manufacturer_code').removeClass('is-invalid');
+        $('#manufacturer_code').addClass('is-valid');
     }   
 
     if($primary_contact_number == ''){
@@ -67,12 +67,12 @@ $('#submitForm').click(function(){
 
         if($formVallidStatus == true){
             $published = $('#published').val();
-            $supplier_id = $('#supplier_id').val();
+            $manufacturer_id = $('#manufacturer_id').val();
 
             $.ajax({
                 method: "POST",
                 url: "details/manufacturer/function.php",
-                data: { fn: "saveFormData", supplier_id: $supplier_id, supplier_name: $supplier_name, supplier_code: $supplier_code, primary_contact_number: $primary_contact_number, secondary_contact_number: $secondary_contact_number, supplier_status: $supplier_status }
+                data: { fn: "saveFormData", manufacturer_id: $manufacturer_id, manufacturer_name: $manufacturer_name, manufacturer_code: $manufacturer_code, primary_contact_number: $primary_contact_number, secondary_contact_number: $secondary_contact_number, manufacturer_status: $manufacturer_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -94,25 +94,25 @@ $('#submitForm').click(function(){
     //}, 500)    
 })
 
-function editTableData($supplier_id){
+function editTableData($manufacturer_id){
     $('#myForm')[0].reset();
     $("#post_video_link").hide();
 
     $.ajax({
         method: "POST",
         url: "details/manufacturer/function.php",
-        data: { fn: "getFormEditData", supplier_id: $supplier_id }
+        data: { fn: "getFormEditData", manufacturer_id: $manufacturer_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){ 
-            $('#supplier_name').val($res1.supplier_name);  
-            $('#supplier_code').val($res1.supplier_code); 
+            $('#manufacturer_name').val($res1.manufacturer_name);  
+            $('#manufacturer_code').val($res1.manufacturer_code); 
             $('#primary_contact_number').val($res1.primary_contact_number); 
             $('#secondary_contact_number').val($res1.secondary_contact_number); 
-            $('#supplier_status').val($res1.supplier_status).trigger('change');   
-            $('#supplier_id').val($res1.supplier_id);
+            $('#manufacturer_status').val($res1.manufacturer_status).trigger('change');   
+            $('#manufacturer_id').val($res1.manufacturer_id);
 
             $('#exampleModalLong').modal('show');
         }
@@ -121,12 +121,12 @@ function editTableData($supplier_id){
 }
 
 //Delete function	
-function deleteTableData($supplier_id){
+function deleteTableData($manufacturer_id){
     if (confirm('Are you sure to delete the data?')) {
         $.ajax({
             method: "POST",
             url: "details/manufacturer/function.php",
-            data: { fn: "deleteTableData", supplier_id: $supplier_id }
+            data: { fn: "deleteTableData", manufacturer_id: $manufacturer_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -217,14 +217,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#supplier_id').html('');
-                $option_supplier_id = "<option value='0'>Select</option>";
+                $('#manufacturer_id').html('');
+                $option_manufacturer_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_supplier_id += "<option data-supplier_code='"+$rows[$i].supplier_code+"' value='"+$rows[$i].supplier_id+"'>"+$rows[$i].supplier_name+"</option>";                    
+                    $option_manufacturer_id += "<option data-manufacturer_code='"+$rows[$i].manufacturer_code+"' value='"+$rows[$i].manufacturer_id+"'>"+$rows[$i].manufacturer_name+"</option>";                    
                 }//end for
                 
-                $('#supplier_id').html($option_supplier_id);
+                $('#manufacturer_id').html($option_manufacturer_id);
             }//end if
         }        
     });//end ajax
@@ -243,14 +243,14 @@ function configureAuthorDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#supplier_name').html('');
-                $option_supplier_name = "<option value='0'>Select</option>";
+                $('#manufacturer_name').html('');
+                $option_manufacturer_name = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_supplier_name += "<option value='"+$rows[$i].supplier_name+"'>"+$rows[$i].author_name+"</option>";                    
+                    $option_manufacturer_name += "<option value='"+$rows[$i].manufacturer_name+"'>"+$rows[$i].author_name+"</option>";                    
                 }//end for
                 
-                $('#supplier_name').html($option_supplier_name);
+                $('#manufacturer_name').html($option_manufacturer_name);
             }//end if
         }        
     });//end ajax

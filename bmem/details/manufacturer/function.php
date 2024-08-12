@@ -13,21 +13,21 @@
 		$return_result = array();
 		$status = true;
 
-		$supplier_id = $_POST["supplier_id"];		
-		$supplier_name = $_POST["supplier_name"];		
-		$supplier_code = $_POST["supplier_code"];				
+		$manufacturer_id = $_POST["manufacturer_id"];		
+		$manufacturer_name = $_POST["manufacturer_name"];		
+		$manufacturer_code = $_POST["manufacturer_code"];				
 		$primary_contact_number = $_POST["primary_contact_number"];			
 		$secondary_contact_number = $_POST["secondary_contact_number"];	
-		$supplier_status = $_POST["supplier_status"];
+		$manufacturer_status = $_POST["manufacturer_status"];
 		
 		try {
-			if($supplier_id > 0){
+			if($manufacturer_id > 0){
 				$status = true;
-				$sql = "UPDATE supplier_list SET supplier_name = '" .$supplier_name. "', supplier_code = '" .$supplier_code. "', primary_contact_number = '" .$primary_contact_number. "', secondary_contact_number = '" .$secondary_contact_number. "', supplier_status = '" .$supplier_status. "' WHERE supplier_id = '" .$supplier_id. "' ";
+				$sql = "UPDATE manufacturer_list SET manufacturer_name = '" .$manufacturer_name. "', manufacturer_code = '" .$manufacturer_code. "', primary_contact_number = '" .$primary_contact_number. "', secondary_contact_number = '" .$secondary_contact_number. "', manufacturer_status = '" .$manufacturer_status. "' WHERE manufacturer_id = '" .$manufacturer_id. "' ";
 				$result = $mysqli->query($sql);
 			}else{
 				$status = true;
-				$sql = "INSERT INTO supplier_list (supplier_name, supplier_code, primary_contact_number, secondary_contact_number, supplier_status) VALUES ('".$supplier_name."','".$supplier_code."', '" .$primary_contact_number. "', '" .$secondary_contact_number. "', '".$supplier_status."')";
+				$sql = "INSERT INTO manufacturer_list (manufacturer_name, manufacturer_code, primary_contact_number, secondary_contact_number, manufacturer_status) VALUES ('".$manufacturer_name."','".$manufacturer_code."', '" .$primary_contact_number. "', '" .$secondary_contact_number. "', '".$manufacturer_status."')";
 				$result = $mysqli->query($sql);
 			}
 				
@@ -45,27 +45,27 @@
 		$status = true;
 		$mainData = array();
 		$author_bio1 = '';
-		$sql = "SELECT * FROM supplier_list ORDER BY supplier_name";
+		$sql = "SELECT * FROM manufacturer_list ORDER BY manufacturer_name";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;
 			$slno = 1;
 			while($row = $result->fetch_array()){
-				$supplier_id = $row['supplier_id'];		
-				$supplier_name = $row['supplier_name'];	
-				$supplier_code = $row['supplier_code'];		
+				$manufacturer_id = $row['manufacturer_id'];		
+				$manufacturer_name = $row['manufacturer_name'];	
+				$manufacturer_code = $row['manufacturer_code'];		
 				$primary_contact_number = $row['primary_contact_number'];	
 				$secondary_contact_number = $row['secondary_contact_number'];	
-				$supplier_status = $row['supplier_status'];	
+				$manufacturer_status = $row['manufacturer_status'];	
 
 				$data[0] = $slno;
-				$data[1] = $supplier_name;
-				$data[2] = $supplier_code;
+				$data[1] = $manufacturer_name;
+				$data[2] = $manufacturer_code;
 				$data[3] = $primary_contact_number;
 				$data[4] = $secondary_contact_number;
-				$data[5] = $activity_status[$supplier_status];
-				$data[6] = "<a href='javascript: void(0)' data-supplier_id='.$supplier_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$supplier_id.")'></i></a> <a href='javascript: void(0)' data-supplier_id='.$supplier_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$supplier_id.")'></i></a>";
+				$data[5] = $activity_status[$manufacturer_status];
+				$data[6] = "<a href='javascript: void(0)' data-manufacturer_id='.$manufacturer_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$manufacturer_id.")'></i></a> <a href='javascript: void(0)' data-manufacturer_id='.$manufacturer_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$manufacturer_id.")'></i></a>";
 
 				array_push($mainData, $data);
 				$slno++;
@@ -84,32 +84,32 @@
 		$return_array = array();
 		$status = true;
 		$mainData = array();
-		$supplier_id = $_POST['supplier_id'];
+		$manufacturer_id = $_POST['manufacturer_id'];
 
-		$sql = "SELECT * FROM supplier_list WHERE supplier_id = '" .$supplier_id. "' ";
+		$sql = "SELECT * FROM manufacturer_list WHERE manufacturer_id = '" .$manufacturer_id. "' ";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;	
 			$row = $result->fetch_array();
 			
-			$supplier_id = $row['supplier_id'];		
-			$supplier_name = $row['supplier_name'];	
-			$supplier_code = $row['supplier_code'];		
+			$manufacturer_id = $row['manufacturer_id'];		
+			$manufacturer_name = $row['manufacturer_name'];	
+			$manufacturer_code = $row['manufacturer_code'];		
 			$primary_contact_number = $row['primary_contact_number'];
 			$secondary_contact_number = $row['secondary_contact_number'];
-			$supplier_status = $row['supplier_status'];	
+			$manufacturer_status = $row['manufacturer_status'];	
 		} else {
 			$status = false;
 		}
 		//$mysqli->close();
 			
-		$return_array['supplier_id'] = $supplier_id;
-		$return_array['supplier_name'] = $supplier_name;
-		$return_array['supplier_code'] = $supplier_code;
+		$return_array['manufacturer_id'] = $manufacturer_id;
+		$return_array['manufacturer_name'] = $manufacturer_name;
+		$return_array['manufacturer_code'] = $manufacturer_code;
 		$return_array['primary_contact_number'] = $primary_contact_number;
 		$return_array['secondary_contact_number'] = $secondary_contact_number;
-		$return_array['supplier_status'] = $supplier_status;
+		$return_array['manufacturer_status'] = $manufacturer_status;
 
 		$return_array['status'] = $status;
     	echo json_encode($return_array);
@@ -118,10 +118,10 @@
 	//Delete function
 	if($fn == 'deleteTableData'){
 		$return_result = array();
-		$supplier_id = $_POST["supplier_id"];
+		$manufacturer_id = $_POST["manufacturer_id"];
 		$status = true;	
 
-		$sql = "DELETE FROM supplier_list WHERE supplier_id = '".$supplier_id."'";
+		$sql = "DELETE FROM manufacturer_list WHERE manufacturer_id = '".$manufacturer_id."'";
 		$result = $mysqli->query($sql);
 		$return_result['status'] = $status;
 		// sleep(1);
@@ -134,21 +134,21 @@
 		$status = true;
 		$mainData = array();
 
-		$sql = "SELECT * FROM supplier_list WHERE supplier_status = 'active' ORDER BY supplier_name ASC";
+		$sql = "SELECT * FROM manufacturer_list WHERE manufacturer_status = 'active' ORDER BY manufacturer_name ASC";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;
 			$slno = 1;
 			while($row = $result->fetch_array()){
-				$supplier_id = $row['supplier_id'];	
-				$supplier_name = $row['supplier_name'];			
-				$supplier_code = $row['supplier_code'];
+				$manufacturer_id = $row['manufacturer_id'];	
+				$manufacturer_name = $row['manufacturer_name'];			
+				$manufacturer_code = $row['manufacturer_code'];
 				$data = new stdClass();
 
-				$data->supplier_id = $supplier_id;
-				$data->supplier_name = $supplier_name;
-				$data->supplier_code = $supplier_code;
+				$data->manufacturer_id = $manufacturer_id;
+				$data->manufacturer_name = $manufacturer_name;
+				$data->manufacturer_code = $manufacturer_code;
 				
 				array_push($mainData, $data);
 				$slno++;

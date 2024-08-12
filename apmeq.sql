@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2024 at 07:10 PM
+-- Generation Time: Aug 12, 2024 at 07:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -263,7 +263,8 @@ CREATE TABLE `manufacturer_list` (
 --
 
 INSERT INTO `manufacturer_list` (`manufacturer_id`, `manufacturer_name`, `manufacturer_code`, `primary_contact_number`, `secondary_contact_number`, `manufacturer_status`) VALUES
-(1, 'iBall', 'IBALL', '9874563210', '9852012547', 1);
+(1, 'iBall', 'IBALL', '9874563210', '9852012547', 1),
+(2, 'Logitech', 'Logitech', '8521459874', '589632012', 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +308,8 @@ CREATE TABLE `supplier_list` (
 --
 
 INSERT INTO `supplier_list` (`supplier_id`, `supplier_name`, `supplier_code`, `primary_contact_number`, `secondary_contact_number`, `supplier_status`) VALUES
-(1, 'Viewcom Telecom', 'VCOM', '9874563210', '9852012547', 1);
+(1, 'Viewcom Telecom', 'VCOM', '9874563210', '9852012547', 1),
+(2, 'RupanjanDa', 'RupanjanDa', '9856320120', '5852474103', 1);
 
 -- --------------------------------------------------------
 
@@ -496,7 +498,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `manufacturer_list`
 --
 ALTER TABLE `manufacturer_list`
-  MODIFY `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `service_providers_list`
@@ -508,7 +510,7 @@ ALTER TABLE `service_providers_list`
 -- AUTO_INCREMENT for table `supplier_list`
 --
 ALTER TABLE `supplier_list`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_details`

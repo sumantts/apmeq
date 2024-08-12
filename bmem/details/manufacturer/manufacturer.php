@@ -65,8 +65,8 @@ include('common/head.php'); ?>
                                 <thead>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Supplier Name</th>
-                                        <th>Supplier Code</th>
+                                        <th>Manufacturer Name</th>
+                                        <th>Manufacturer Code</th>
                                         <th>Primary Contact Number</th>
                                         <th>Secondary Contact Number</th>
                                         <th>Status</th>
@@ -76,8 +76,8 @@ include('common/head.php'); ?>
                                 <tfoot>
                                     <tr>
                                         <th>Sl.No.</th>
-                                        <th>Supplier Name</th>
-                                        <th>Supplier Code</th>
+                                        <th>Manufacturer Name</th>
+                                        <th>Manufacturer Code</th>
                                         <th>Primary Contact Number</th>
                                         <th>Secondary Contact Number</th>
                                         <th>Status</th>
@@ -103,24 +103,24 @@ include('common/head.php'); ?>
                             <form class="needs-validation" novalidate id="myForm" name="myForm">
                                 <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="supplier_name" class="text-danger">Supplier Name*</label>
-                                        <input type="text" class="form-control" name="supplier_name" id="supplier_name">
+                                        <label for="manufacturer_name" class="text-danger">Manufacturer Name*</label>
+                                        <input type="text" class="form-control" name="manufacturer_name" id="manufacturer_name">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Supplier Name.
+                                            Please provide Manufacturer Name.
                                         </div>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="supplier_code" class="text-danger">Supplier Code*</label>
-                                        <input type="text" class="form-control myclass" name="supplier_code" id="supplier_code">
+                                        <label for="manufacturer_code" class="text-danger">Manufacturer Code*</label>
+                                        <input type="text" class="form-control myclass" name="manufacturer_code" id="manufacturer_code">
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Supplier Code.
+                                            Please provide Manufacturer Code.
                                         </div>
                                     </div>  
 
@@ -141,12 +141,12 @@ include('common/head.php'); ?>
                                     </div> 
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="supplier_status" class="text-danger">Status*</label>
-                                        <select class="form-control" name="supplier_status" id="supplier_status">
+                                        <label for="manufacturer_status" class="text-danger">Status*</label>
+                                        <select class="form-control" name="manufacturer_status" id="manufacturer_status">
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </select>
-                                        <input type="hidden" name="supplier_id" id="supplier_id" value="0">
+                                        <input type="hidden" name="manufacturer_id" id="manufacturer_id" value="0">
                                     </div> 
                                 </div> 
                             </form>
