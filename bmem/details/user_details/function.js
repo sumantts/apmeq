@@ -5,74 +5,107 @@ $('#onMyModal').on('click', function(){
 })
 
 function validateForm(){
-    $category_id = $('#category_id').val();
-    $for_the_year = $('#for_the_year').val();
-    $author_name = $('#author_name').val().replace(/^\s+|\s+$/gm,'');
-    $email = $('#email').val().replace(/^\s+|\s+$/gm,'');
-    $registration_number = $('#registration_number').val().replace(/^\s+|\s+$/gm,'');
-    $course_id = $('#course_id').val();
+    $user_name = $('#user_name').val();
+    $user_type_id = $('#user_type_id').val();
+    $hospital_id = $('#hospital_id').val();
+    $user_mobile = $('#user_mobile').val().replace(/^\s+|\s+$/gm,'');
+    $user_email = $('#user_email').val().replace(/^\s+|\s+$/gm,'');
+    $user_dob = $('#user_dob').val();
+    $user_address = $('#user_address').val().replace(/^\s+|\s+$/gm,'');
+    $user_user_name = $('#user_user_name').val().replace(/^\s+|\s+$/gm,'');
+    $user_password = $('#user_password').val().replace(/^\s+|\s+$/gm,'');
 
     $status = true;
 
-    if($category_id == '0'){
+    if($user_name == ''){
         $status = false;
-        $('#category_id').removeClass('is-valid');
-        $('#category_id').addClass('is-invalid');
+        $('#user_name').removeClass('is-valid');
+        $('#user_name').addClass('is-invalid');
     }else{
         $status = true;
-        $('#category_id').removeClass('is-invalid');
-        $('#category_id').addClass('is-valid');
+        $('#user_name').removeClass('is-invalid');
+        $('#user_name').addClass('is-valid');
     }
 
-    if($for_the_year == '0'){
+    if($user_type_id == '0'){
         $status = false;
-        $('#for_the_year').removeClass('is-valid');
-        $('#for_the_year').addClass('is-invalid');
+        $('#user_type_id').removeClass('is-valid');
+        $('#user_type_id').addClass('is-invalid');
     }else{
         $status = true;
-        $('#for_the_year').removeClass('is-invalid');
-        $('#for_the_year').addClass('is-valid');
+        $('#user_type_id').removeClass('is-invalid');
+        $('#user_type_id').addClass('is-valid');
     }
 
-    if($course_id == '0'){
+    if($user_dob == '0'){
         $status = false;
-        $('#course_id').removeClass('is-valid');
-        $('#course_id').addClass('is-invalid');
+        $('#user_dob').removeClass('is-valid');
+        $('#user_dob').addClass('is-invalid');
     }else{
         $status = true;
-        $('#course_id').removeClass('is-invalid');
-        $('#course_id').addClass('is-valid');
+        $('#user_dob').removeClass('is-invalid');
+        $('#user_dob').addClass('is-valid');
     }
 
-    if($author_name == ''){
+    if($hospital_id == '0'){
         $status = false;
-        $('#author_name').removeClass('is-valid');
-        $('#author_name').addClass('is-invalid');
+        $('#hospital_id').removeClass('is-valid');
+        $('#hospital_id').addClass('is-invalid');
     }else{
         $status = true;
-        $('#author_name').removeClass('is-invalid');
-        $('#author_name').addClass('is-valid');
+        $('#hospital_id').removeClass('is-invalid');
+        $('#hospital_id').addClass('is-valid');
     }
 
-    if($email == ''){
+    if($user_mobile == ''){
         $status = false;
-        $('#email').removeClass('is-valid');
-        $('#email').addClass('is-invalid');
+        $('#user_mobile').removeClass('is-valid');
+        $('#user_mobile').addClass('is-invalid');
     }else{
         $status = true;
-        $('#email').removeClass('is-invalid');
-        $('#email').addClass('is-valid');
+        $('#user_mobile').removeClass('is-invalid');
+        $('#user_mobile').addClass('is-valid');
     }  
 
-    if($registration_number == ''){
+    if($user_email == ''){
         $status = false;
-        $('#registration_number').removeClass('is-valid');
-        $('#registration_number').addClass('is-invalid');
+        $('#user_email').removeClass('is-valid');
+        $('#user_email').addClass('is-invalid');
     }else{
         $status = true;
-        $('#registration_number').removeClass('is-invalid');
-        $('#registration_number').addClass('is-valid');
-    }     
+        $('#user_email').removeClass('is-invalid');
+        $('#user_email').addClass('is-valid');
+    }   
+
+    if($user_address == ''){
+        $status = false;
+        $('#user_address').removeClass('is-valid');
+        $('#user_address').addClass('is-invalid');
+    }else{
+        $status = true;
+        $('#user_address').removeClass('is-invalid');
+        $('#user_address').addClass('is-valid');
+    }
+
+    if($user_user_name == ''){
+        $status = false;
+        $('#user_user_name').removeClass('is-valid');
+        $('#user_user_name').addClass('is-invalid');
+    }else{
+        $status = true;
+        $('#user_user_name').removeClass('is-invalid');
+        $('#user_user_name').addClass('is-valid');
+    }  
+
+    if($user_password == ''){
+        $status = false;
+        $('#user_password').removeClass('is-valid');
+        $('#user_password').addClass('is-invalid');
+    }else{
+        $status = true;
+        $('#user_password').removeClass('is-invalid');
+        $('#user_password').addClass('is-valid');
+    }        
 
     $('#submitForm_spinner').hide();
     $('#submitForm_spinner_text').hide();
@@ -82,29 +115,43 @@ function validateForm(){
 }//en validate form
 
 function clearForm(){
-    $('#category_id').val('0').trigger('change');
-    $('#category_id').removeClass('is-valid');
-    $('#category_id').removeClass('is-invalid');
+    $('#user_name').val('');
+    $('#user_name').removeClass('is-valid');
+    $('#user_name').removeClass('is-invalid');
 
-    $('#for_the_year').val('0').trigger('change');
-    $('#for_the_year').removeClass('is-valid');
-    $('#for_the_year').removeClass('is-invalid');
+    $('#user_type_id').val('0').trigger('change');
+    $('#user_type_id').removeClass('is-valid');
+    $('#user_type_id').removeClass('is-invalid');
 
-    $('#author_name').val('');
-    $('#author_name').removeClass('is-valid');
-    $('#author_name').removeClass('is-invalid');
+    $('#hospital_id').val('0').trigger('change');
+    $('#hospital_id').removeClass('is-valid');
+    $('#hospital_id').removeClass('is-invalid');
 
-    $('#email').val('');
-    $('#email').removeClass('is-valid');
-    $('#email').removeClass('is-invalid');
+    $('#user_mobile').val('');
+    $('#user_mobile').removeClass('is-valid');
+    $('#user_mobile').removeClass('is-invalid');
 
-    $('#registration_number').val('');
-    $('#registration_number').removeClass('is-valid');
-    $('#registration_number').removeClass('is-invalid');
+    $('#user_email').val('');
+    $('#user_email').removeClass('is-valid');
+    $('#user_email').removeClass('is-invalid');
 
-    $('#author_id').val('0');           
-    let img = document.getElementById('image');
-    img.src = '';
+    $('#user_address').val('');
+    $('#user_address').removeClass('is-valid');
+    $('#user_address').removeClass('is-invalid');
+
+    $('#user_user_name').val('');
+    $('#user_user_name').removeClass('is-valid');
+    $('#user_user_name').removeClass('is-invalid');
+
+    $('#user_password').val('');
+    $('#user_password').removeClass('is-valid');
+    $('#user_password').removeClass('is-invalid');  
+
+    $('#user_dob').val('');
+    $('#user_dob').removeClass('is-valid');
+    $('#user_dob').removeClass('is-invalid');    
+
+    $('#user_id').val('0');    
 
 }//end 
 
@@ -121,29 +168,32 @@ $('#submitForm').click(function(){
         $formVallidStatus = validateForm();
 
         if($formVallidStatus == true){
-            $category_id = $('#category_id').val();
-            $author_id = $('#author_id').val();
-            $author_photo = localStorage.getItem('author_photo');
-            $author_status = $('#author_status').val();
-            $for_the_year = $('#for_the_year').val();
-            $course_id = 0;//$('#course_id').val();
+            $user_id = $('#user_id').val();
+            $user_name = $('#user_name').val();
+            $user_type_id = $('#user_type_id').val();
+            $hospital_id = $('#hospital_id').val();
+            $user_mobile = $('#user_mobile').val();
+            $user_phone = $('#user_phone').val();
+            $user_email = $('#user_email').val();
+            $user_dob = $('#user_dob').val();
+            $user_address = $('#user_address').val();
+            $user_user_name = $('#user_user_name').val();
+            $user_password = $('#user_password').val();
+            $user_status = $('#user_status').val();
 
             $.ajax({
                 method: "POST",
                 url: "details/user_details/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, for_the_year: $for_the_year, course_id: $course_id, author_id: $author_id, author_name: $author_name, email: $email, registration_number: $registration_number, author_photo: $author_photo, author_status: $author_status }
+                data: { fn: "saveFormData", user_id: $user_id, user_name: $user_name, user_type_id: $user_type_id, hospital_id: $hospital_id, user_mobile: $user_mobile, user_phone: $user_phone, user_email: $user_email, user_dob: $user_dob, user_address: $user_address, user_user_name: $user_user_name, user_password: $user_password, user_status: $user_status }
             })
             .done(function( res ) {
                 //console.log(res);
                 $res1 = JSON.parse(res);
                 if($res1.status == true){
-                    $('#orgFormAlert1').css("display", "block");
-                    $('.toast-right').toast('show');
-                    //$('#liveToast').toast('show');
-                    clearForm();
-                    localStorage.setItem('author_photo', '');
                     $('#exampleModalLong').modal('hide');
-                    populateDataTable();
+                    $('#orgFormAlert1').css("display", "block");                    
+                    clearForm();                    
+                    populateDataTable(); 
                 }else{
                     alert($res1.error_message);
                 }
@@ -153,39 +203,42 @@ $('#submitForm').click(function(){
     //}, 500)    
 })
 
-function editTableData($author_id){
+function editTableData($user_id){
     $('#exampleModalLong').modal('show');
     $.ajax({
         method: "POST",
         url: "details/user_details/function.php",
-        data: { fn: "getFormEditData", author_id: $author_id }
+        data: { fn: "getFormEditData", user_id: $user_id }
     })
     .done(function( res ) {
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){
-            $('#category_id').val($res1.category_id).trigger('change');
-            $('#for_the_year').val($res1.for_the_year).trigger('change');
-            $('#author_name').val($res1.author_name);
-            $('#email').val($res1.email);            
-            $('#registration_number').val($res1.registration_number); 
-            let img = document.getElementById('image');
-            img.src = $res1.author_photo;
-            localStorage.setItem("author_photo", $res1.author_photo);
-            $('#author_status').val($res1.author_status).trigger('change');  
-            $('#author_id').val($author_id);
+            $('#user_id').val($res1.user_id);
+            $('#user_name').val($res1.user_name);
+            $('#user_type_id').val($res1.user_type_id).trigger('change');
+            $('#hospital_id').val($res1.hospital_id).trigger('change');
+            $('#user_mobile').val($res1.user_mobile);
+            $('#user_phone').val($res1.user_phone);
+            $('#user_email').val($res1.user_email);
+            $('#user_dob').val($res1.user_dob);
+            $('#user_address').val($res1.user_address);
+            $('#user_user_name').val($res1.user_user_name);
+            $('#user_password').val($res1.user_password);
+            $('#user_status').val($res1.user_status).trigger('change');  
+            
         }
     });//end ajax
 
 }
 
 //Delete function	
-function deleteTableData($author_id){
+function deleteTableData($user_id){
     if (confirm('Are you sure to delete the Data?')) {
         $.ajax({
             method: "POST",
             url: "details/user_details/function.php",
-            data: { fn: "deleteTableData", author_id: $author_id }
+            data: { fn: "deleteTableData", user_id: $user_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -265,11 +318,11 @@ function populateDataTable(){
 
 
 //Category
-function configureCategoryDropDown(){
+function configureUserTypeDropDown(){
     $.ajax({
         method: "POST",
         url: "details/user_details/function.php",
-        data: { fn: "getAllCategoryName" }
+        data: { fn: "getAllUserType" }
     })
     .done(function( res ) {
         $res1 = JSON.parse(res);
@@ -277,25 +330,25 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#user_type_id').html('');
+                $option_user_type_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $option_user_type_id += "<option value='"+$rows[$i].user_type_id+"'>"+$rows[$i].user_type_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#user_type_id').html($option_user_type_id);
             }//end if
         }        
     });//end ajax
 }//end
 
 //Course
-function configureCourseDropDown(){
+function configureHospitaDropDown(){
     $.ajax({
         method: "POST",
         url: "details/user_details/function.php",
-        data: { fn: "getAllCourseName" }
+        data: { fn: "getAllHospitaName" }
     })
     .done(function( res ) {
         $res1 = JSON.parse(res);
@@ -303,21 +356,21 @@ function configureCourseDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#course_id').html('');
-                $option_course_id = "<option value='0'>Select</option>";
+                $('#hospital_id').html('');
+                $option_hospital_id = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_course_id += "<option data-course_fee='"+$rows[$i].course_fee+"' data-course_duration='"+$rows[$i].course_duration+"' value='"+$rows[$i].course_id+"'>"+$rows[$i].course_name+"</option>";                    
+                    $option_hospital_id += "<option value='"+$rows[$i].hospital_id+"'>"+$rows[$i].hospital_name+"</option>";                    
                 }//end for
                 
-                $('#course_id').html($option_course_id);
+                $('#hospital_id').html($option_hospital_id);
             }//end if
         }        
     });//end ajax
 }//end
 
 $(document).ready(function () {
-    configureCategoryDropDown(); 
-    configureCourseDropDown(); 
+    configureUserTypeDropDown(); 
+    configureHospitaDropDown(); 
     populateDataTable();
 });

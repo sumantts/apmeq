@@ -1,17 +1,7 @@
 <?php 
 if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php');  
-?>
-<script type="text/javascript">   
-
-</script>
-<style>
-    /*table td {
-        word-break: break-word;
-        vertical-align: top;
-        white-space: normal !important;
-    }*/
-</style>
+?> 
 
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -92,11 +82,11 @@ include('common/head.php');
                                     <tr>
                                         <th>Sl.No.</th> 
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Registration Number</th>
-                                        <th>Photo</th>
-                                        <th>Department</th>
-                                        <th>For the Year</th>
+                                        <th>User Type</th>
+                                        <th>Mobile Number</th>
+                                        <th>Phone Number</th>
+                                        <th>Email ID</th>
+                                        <th>Address</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -105,11 +95,11 @@ include('common/head.php');
                                     <tr>
                                         <th>Sl.No.</th> 
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Registration Number</th>
-                                        <th>Photo</th>
-                                        <th>Department</th>
-                                        <th>For the Year</th>
+                                        <th>User Type</th>
+                                        <th>Mobile Number</th>
+                                        <th>Phone Number</th>
+                                        <th>Email ID</th>
+                                        <th>Address</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -132,52 +122,10 @@ include('common/head.php');
                         <div class="modal-body">
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="category_id" class="text-danger">Department*</label>
-                                        <select class="form-control" name="category_id" id="category_id">
-                                            <option value="0">Select</option> 
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please select Department.
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="for_the_year" class="text-danger">For the Year*</label>
-                                        <select class="form-control" name="for_the_year" id="for_the_year">
-                                            <?php
-                                            for($i = 0; $i < sizeof($forTheYearsArr); $i++){
-                                            ?>
-                                            <option value="<?=$forTheYearsArr[$i]->value?>"><?=$forTheYearsArr[$i]->text?></option> 
-                                            <?php } ?>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please select Department.
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="col-md-4 mb-3">
-                                        <label for="course_id" class="text-danger">Course*</label>
-                                        <select class="form-control" name="course_id" id="course_id">
-                                            <option value="0">Select</option> 
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please select Course.
-                                        </div>
-                                    </div> -->
                                     
                                     <div class="col-md-4 mb-3">
-                                        <label for="author_name" class="text-danger">Student Name*</label>
-                                        <input type="text" class="form-control" id="author_name" value="" required >
+                                        <label for="user_name" class="text-danger">Name*</label>
+                                        <input type="text" class="form-control" id="user_name" value="" >
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
@@ -185,49 +133,128 @@ include('common/head.php');
                                             Please provide Name.
                                         </div>
                                     </div> 
-                                    
+
                                     <div class="col-md-4 mb-3">
-                                        <label for="email" class="text-danger">Primary Email*</label>
-                                        <input type="text" class="form-control" id="email" value="">
-                                        <!-- <textarea class="form-control" id="author_bio" value="" required style="min-height:300px;"></textarea> -->
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please provide Primary Email.
-                                        </div>
-                                    </div>  
-                                    
-                                    <div class="col-md-4 mb-3">
-                                        <label for="registration_number" class="text-danger">Registration Number*</label>
-                                        <input type="text" class="form-control" id="registration_number" value="">
-                                        <!-- <textarea class="form-control" id="author_bio" value="" required style="min-height:300px;"></textarea> -->
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please provide Registration Number.
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4 mb-2 mt-4">
-                                        <input type="file" accept="image/*" class="custom-file-input" id="author_photo" aria-describedby="author_photo"  onchange="savePhoto()">
-                                        <label class="custom-file-label" for="validatedCustomFile">Choose image...</label>
-                                        <small id="author_photoError" class="form-text text-danger"> </small>
-                                        <img src="" id="image" width="100">
-                                    </div> 
-                                    
-                                    <div class="col-md-4 mb-3">
-                                        <label for="author_status" class="text-danger">Activity Status*</label>
-                                        <select class="form-control" name="author_status" id="author_status">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                        <label for="user_type_id" class="text-danger">User Type*</label>
+                                        <select class="form-control" name="user_type_id" id="user_type_id">
+                                            <option value="0">Select</option> 
                                         </select>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Biography.
+                                            Please select User Type.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="hospital_id" class="text-danger">Hospital Name*</label>
+                                        <select class="form-control" name="hospital_id" id="hospital_id">
+                                            <option value="0">Select</option>                                             
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please select Hospital Name.
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_mobile" class="text-danger">Mobile Number*</label>
+                                        <input type="tel" class="form-control" id="user_mobile" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Mobile Number.
+                                        </div>
+                                    </div>   
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_phone" >Phone Number</label>
+                                        <input type="text" class="form-control" id="user_phone" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Phone Number.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_email" class="text-danger">Email ID*</label>
+                                        <input type="text" class="form-control" id="user_email" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Email ID.
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_dob" class="text-danger">Date of Birth*</label>
+                                        <input type="date" class="form-control" id="user_dob" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Date of Birth.
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-md-8 mb-3">
+                                        <label for="user_address" class="text-danger">Address*</label>
+                                        <textarea class="form-control" name="user_address" id="user_address"> </textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Address.
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_user_name" class="text-danger">Username*</label>
+                                        <input type="text" class="form-control" id="user_user_name" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Username.
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_password" class="text-danger">Password*</label>
+                                        <input type="text" class="form-control" id="user_password" value=""> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please enter Password.
+                                        </div>
+                                    </div> 
+                                    
+                                    <!-- <div class="col-md-4 mb-2 mt-4">
+                                        <input type="file" accept="image/*" class="custom-file-input" id="author_photo" aria-describedby="author_photo"  onchange="savePhoto()">
+                                        <label class="custom-file-label" for="validatedCustomFile">Choose image...</label>
+                                        <small id="author_photoError" class="form-text text-danger"> </small>
+                                        <img src="" id="image" width="100">
+                                    </div>  -->
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="user_status" class="text-danger">Status*</label>
+                                        <select class="form-control" name="user_status" id="user_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please select status.
                                         </div>
                                     </div> 
 
@@ -235,13 +262,13 @@ include('common/head.php');
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" id="author_id" value="0">
+                            <input type="hidden" id="user_id" value="0">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                             <button class="btn  btn-primary" type="button" id="submitForm">
                                 <span class="spinner-border spinner-border-sm" role="status" style="display: none;" id="submitForm_spinner"></span>
                                 <span class="load-text" style="display: none;" id="submitForm_spinner_text">Loading...</span>
-                                <span class="btn-text" id="submitForm_text">Save Changes</span>
+                                <span class="btn-text" id="submitForm_text">Save</span>
                             </button>
                         </div>
                     </div>
