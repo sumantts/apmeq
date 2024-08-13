@@ -59,7 +59,8 @@
 				$data[1] = $user_type_name;
 				$data[2] = $user_type_code;
 				$data[3] = $activity_status[$user_type_status];
-				$data[4] = "<a href='javascript: void(0)' data-user_type_id='.$user_type_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$user_type_id.")'></i></a> <a href='javascript: void(0)' data-user_type_id='.$user_type_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$user_type_id.")'></i></a>";
+				$data[4] = "Restricted";
+				//$data[4] = "<a href='javascript: void(0)' data-user_type_id='.$user_type_id.'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$user_type_id.")'></i></a> <a href='javascript: void(0)' data-user_type_id='.$user_type_id.'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$user_type_id.")'></i></a>";
 
 				array_push($mainData, $data);
 				$slno++;

@@ -59,7 +59,7 @@ include('common/head.php'); ?>
 							<strong>Success!</strong> Your Data saved successfully.
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						</div>
-                        <button type="button" class="btn btn-primary mb-2 float-right" id="onMyModal">Add New</button>
+                        <!-- <button type="button" class="btn btn-primary mb-2 float-right" id="onMyModal">Add New</button> -->
                         
                         <div class="table-responsive">
                             <table id="example" class="table table-striped" style="width:100%">
@@ -135,11 +135,11 @@ include('common/head.php'); ?>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                            <button class="btn  btn-primary" type="button" id="submitForm">
+                            <!-- <button class="btn  btn-primary" type="button" id="submitForm">
                                 <span class="spinner-border spinner-border-sm" role="status" style="display: none;" id="submitForm_spinner"></span>
                                 <span class="load-text" style="display: none;" id="submitForm_spinner_text">Loading...</span>
                                 <span class="btn-text" id="submitForm_text">Save</span>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>

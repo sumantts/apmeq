@@ -13,9 +13,9 @@
 					</li> 
 
 					
-					<li class="nav-item <?php if($p == 'hospital-details'){ ?> active <?php } ?>">
+					<!-- <li class="nav-item <?php if($p == 'hospital-details'){ ?> active <?php } ?>">
 					    <a href="?p=hospital-details&gr=setup" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hospital Details</span></a>
-					</li>
+					</li> -->
 					<li class="nav-item <?php if($p == 'department'){ ?> active <?php } ?>">
 						<a href="?p=department&gr=setup" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Department</span></a>
 					</li>
