@@ -7,7 +7,7 @@
 					    <a href="?p=dashboard" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 
-					<?php if($_SESSION["user_type_code"] == 'super'){?>
+					<?php if($_SESSION["user_type_code"] == 'dev' || $_SESSION["user_type_code"] == 'super'){?>
 					<li class="nav-item pcoded-menu-caption" id="setup">
 						<label>SETUP </label>
 					</li> 

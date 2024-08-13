@@ -131,6 +131,10 @@ function clearForm(){
     $('#user_mobile').removeClass('is-valid');
     $('#user_mobile').removeClass('is-invalid');
 
+    $('#user_phone').val('');
+    $('#user_phone').removeClass('is-valid');
+    $('#user_phone').removeClass('is-invalid');
+
     $('#user_email').val('');
     $('#user_email').removeClass('is-valid');
     $('#user_email').removeClass('is-invalid');

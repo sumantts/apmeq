@@ -33,7 +33,7 @@ $('#Signin').click(function(){
         });//end ajax
 
         //window.location = '?p=dashboard';
-    }, 2500)
+    }, 500)
     
 })
 

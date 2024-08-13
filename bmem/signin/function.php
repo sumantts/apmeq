@@ -20,6 +20,10 @@
 			if ($result->num_rows > 0) {		
 				$row = $result->fetch_array();	
 				$user_status = $row['user_status'];
+				$user_type_id = $row['user_type_id']; 
+				$user_type_name = $row['user_type_name'];				
+				$user_type_code = $row['user_type_code'];
+
 				if($user_status == 1){
 					$user_id = $row['user_id'];
 					$user_name = $row['user_name'];	
@@ -31,10 +35,7 @@
 					$user_dob = $row['user_dob'];			
 					$user_address = $row['user_address'];			
 					$user_user_name = $row['user_user_name'];			
-					$user_password = $row['user_password'];	 
-								
-					$user_type_name = $row['user_type_name'];				
-					$user_type_code = $row['user_type_code'];				
+					$user_password = $row['user_password'];				
 					$user_type_status = $row['user_type_status'];	
 
 					$_SESSION["user_id"] = $user_id;
@@ -53,8 +54,14 @@
 					$_SESSION["user_type_code"] = $user_type_code; 	
 					$_SESSION["user_type_status"] = $user_type_status; 
 				}else{
-					$status = false;
-					$message = 'Account Inactive';
+					$status = false; 
+					if($user_type_code == 'super'){
+						$message = 'Account Inactive, please contact to Developer';
+					}else if($user_type_code == 'h_admin'){
+						$message = 'Account Inactive, please contact to Super Admin';
+					}else{
+						$message = 'Account Inactive, please contact to Hospital Admin';
+					}
 				}
 			} else {
 				$status = false;
@@ -67,7 +74,7 @@
 
 		$return_result['status'] = $status;
 		$return_result['message'] = $message;
-		sleep(2);
+		//sleep(2);
 		echo json_encode($return_result);
 	}//end function doLogin
 	
@@ -97,7 +104,7 @@
 		//$mysqli->close();
 
 		$return_result['status'] = $status;
-		sleep(2);
+		//sleep(2);
 		echo json_encode($return_result);
 	}//end function doLogin
 
