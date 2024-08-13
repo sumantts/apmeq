@@ -94,8 +94,15 @@
 				$data[5] = $user_email;
 				$data[6] = $user_address;
 				$data[7] = $activity_status[$user_status];
-				$data[8] = "<a href='javascript: void(0)' data-center_id='1'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$user_id.")'></i></a><a href='javascript: void(0)' data-center_id='1'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$user_id.")'></i></a>";
-
+				if($_SESSION["user_type_code"] == 'dev' || $_SESSION["user_type_code"] == 'super' || $_SESSION["user_type_code"] == 'h_admin'){
+					if($_SESSION["user_type_code"] == 'dev'){
+						$data[8] = "<a href='javascript: void(0)' data-center_id='1'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$user_id.")'></i></a><a href='javascript: void(0)' data-center_id='1'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteTableData(".$user_id.")'></i></a>";
+					}else{
+						$data[8] = "<a href='javascript: void(0)' data-center_id='1'><i class='fa fa-edit' aria-hidden='true' onclick='editTableData(".$user_id.")'></i></a>";
+					}
+				}else{
+					$data[8] = "Restricted";
+				}
 				array_push($mainData, $data);
 				$slno++;
 			}
