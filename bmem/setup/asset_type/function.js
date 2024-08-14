@@ -213,34 +213,7 @@ function configureCategoryDropDown(){
     });//end ajax
 }//end
 
-function configureAuthorDropDown(){
-    $.ajax({
-        method: "POST",
-        url: "setup/asset_type/function.php",
-        data: { fn: "getAllAuthorsyName" }
-    })
-    .done(function( res ) {
-        $res1 = JSON.parse(res);
-        //console.log(JSON.stringify($res1));
-        if($res1.status == true){
-            $rows = $res1.data;
-
-            if($rows.length > 0){
-                $('#asset_type_name').html('');
-                $option_asset_type_name = "<option value='0'>Select</option>";
-
-                for($i = 0; $i < $rows.length; $i++){
-                    $option_asset_type_name += "<option value='"+$rows[$i].asset_type_name+"'>"+$rows[$i].author_name+"</option>";                    
-                }//end for
-                
-                $('#asset_type_name').html($option_asset_type_name);
-            }//end if
-        }        
-    });//end ajax
-}//end
-
 $(document).ready(function () {
     populateDataTable();
     //configureCategoryDropDown();
-    //configureAuthorDropDown();
 });

@@ -2,16 +2,6 @@
 if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php');  
 ?>
-<script type="text/javascript">   
-
-</script>
-<style>
-    /*table td {
-        word-break: break-word;
-        vertical-align: top;
-        white-space: normal !important;
-    }*/
-</style>
 
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -92,11 +82,15 @@ include('common/head.php');
                                     <tr>
                                         <th>Sl.No.</th> 
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Registration Number</th>
-                                        <th>Photo</th>
-                                        <th>Department</th>
-                                        <th>For the Year</th>
+                                        <th>Department Name</th>
+                                        <th>Manufacturer Name</th>
+                                        <th>Supplier Name</th>
+                                        <th>Installation Date</th>
+                                        <th>Total year in Service</th>
+                                        <th>Calibration Last Date</th>
+                                        <th>Calibration Frequency </th>
+                                        <th>Service Provider Name</th>
+                                        <th>Service Provider Phone</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -105,11 +99,15 @@ include('common/head.php');
                                     <tr>
                                         <th>Sl.No.</th> 
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Registration Number</th>
-                                        <th>Photo</th>
-                                        <th>Department</th>
-                                        <th>For the Year</th>
+                                        <th>Department Name</th>
+                                        <th>Manufacturer Name</th>
+                                        <th>Supplier Name</th>
+                                        <th>Installation Date</th>
+                                        <th>Total year in Service</th>
+                                        <th>Calibration Last Date</th>
+                                        <th>Calibration Frequency </th>
+                                        <th>Service Provider Name</th>
+                                        <th>Service Provider Phone</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -131,10 +129,65 @@ include('common/head.php');
                         </div>
                         <div class="modal-body">
                             <form class="needs-validation" novalidate>
-                                <div class="form-row">
+                                <div class="form-row">                                    
                                     <div class="col-md-4 mb-3">
-                                        <label for="category_id" class="text-danger">Department*</label>
-                                        <select class="form-control" name="category_id" id="category_id">
+                                        <label for="name_of_asset" class="text-danger">Name of Asset*</label>
+                                        <input type="text" class="form-control" id="name_of_asset" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Name of Asset.
+                                        </div>
+                                    </div>      
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="asset_code" class="text-danger">Asset Code*</label>
+                                        <input type="text" class="form-control" id="asset_code" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Asset Code.
+                                        </div>
+                                    </div>       
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="asset_slno" class="text-danger">Asset serial No*</label>
+                                        <input type="text" class="form-control" id="asset_slno" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Asset serial No.
+                                        </div>
+                                    </div>        
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="model_name" class="text-danger">Model name*</label>
+                                        <input type="text" class="form-control" id="model_name" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Model name.
+                                        </div>
+                                    </div>         
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="equipment_name" class="text-danger">Equipment Name*</label>
+                                        <input type="text" class="form-control" id="equipment_name" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Equipment Name.
+                                        </div>
+                                    </div>    
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="department_id" class="text-danger">Department*</label>
+                                        <select class="form-control" name="department_id" id="department_id">
                                             <option value="0">Select</option> 
                                         </select>
                                         <div class="valid-feedback">
@@ -144,78 +197,111 @@ include('common/head.php');
                                             Please select Department.
                                         </div>
                                     </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="for_the_year" class="text-danger">For the Year*</label>
-                                        <select class="form-control" name="for_the_year" id="for_the_year">
-                                            <?php
-                                            for($i = 0; $i < sizeof($forTheYearsArr); $i++){
-                                            ?>
-                                            <option value="<?=$forTheYearsArr[$i]->value?>"><?=$forTheYearsArr[$i]->text?></option> 
-                                            <?php } ?>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please select Department.
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="col-md-4 mb-3">
-                                        <label for="course_id" class="text-danger">Course*</label>
-                                        <select class="form-control" name="course_id" id="course_id">
-                                            <option value="0">Select</option> 
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>                                    
-                                        <div class="invalid-feedback">
-                                            Please select Course.
-                                        </div>
-                                    </div> -->
                                     
                                     <div class="col-md-4 mb-3">
-                                        <label for="author_name" class="text-danger">Student Name*</label>
-                                        <input type="text" class="form-control" id="author_name" value="" required >
+                                        <label for="hospital_id" class="text-danger">Hospital*</label>
+                                        <select class="form-control" name="hospital_id" id="hospital_id">
+                                            <option value="0">Select</option> 
+                                        </select>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Name.
+                                            Please select Hospital.
                                         </div>
                                     </div> 
-                                    
+
                                     <div class="col-md-4 mb-3">
-                                        <label for="email" class="text-danger">Primary Email*</label>
-                                        <input type="text" class="form-control" id="email" value="">
-                                        <!-- <textarea class="form-control" id="author_bio" value="" required style="min-height:300px;"></textarea> -->
+                                        <label for="manufacturer_id" class="text-danger">Manufacturer*</label>
+                                        <select class="form-control" name="manufacturer_id" id="manufacturer_id">
+                                            <option value="0">Select</option> 
+                                        </select>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Primary Email.
+                                            Please select Manufacturer.
                                         </div>
                                     </div>  
-                                    
+
                                     <div class="col-md-4 mb-3">
-                                        <label for="registration_number" class="text-danger">Registration Number*</label>
-                                        <input type="text" class="form-control" id="registration_number" value="">
-                                        <!-- <textarea class="form-control" id="author_bio" value="" required style="min-height:300px;"></textarea> -->
+                                        <label for="supplier_id" class="text-danger">Supplier*</label>
+                                        <select class="form-control" name="supplier_id" id="supplier_id">
+                                            <option value="0">Select</option> 
+                                        </select>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Registration Number.
+                                            Please select Supplier.
                                         </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4 mb-2 mt-4">
-                                        <input type="file" accept="image/*" class="custom-file-input" id="author_photo" aria-describedby="author_photo"  onchange="savePhoto()">
-                                        <label class="custom-file-label" for="validatedCustomFile">Choose image...</label>
-                                        <small id="author_photoError" class="form-text text-danger"> </small>
-                                        <img src="" id="image" width="100">
-                                    </div> 
+                                    </div>         
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="installation_date" class="text-danger">Installation Date*</label>
+                                        <input type="date" class="form-control" id="installation_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Installation Date.
+                                        </div>
+                                    </div>        
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="total_year_in_service" class="text-danger">Total Year in Service*</label>
+                                        <input type="text" class="form-control" id="total_year_in_service" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Total Year in Service.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="calibration_last_date" class="text-danger">Calibration Last Date*</label>
+                                        <input type="date" class="form-control" id="calibration_last_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Calibration Last Date.
+                                        </div>
+                                    </div>        
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="calibration_frequency" class="text-danger">Calibration Frequency*</label>
+                                        <input type="text" class="form-control" id="calibration_frequency" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Calibration Frequency.
+                                        </div>
+                                    </div>        
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="preventive_maintain_last_date" class="text-danger">Preventive Maintain Last Date*</label>
+                                        <input type="date" class="form-control" id="preventive_maintain_last_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Preventive Maintain Last Date.
+                                        </div>
+                                    </div>        
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="preventive_maintenance_frequency" class="text-danger">Preventive Maintenance Frequency*</label>
+                                        <input type="text" class="form-control" id="preventive_maintenance_frequency" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Preventive Maintenance Frequency.
+                                        </div>
+                                    </div>   
                                     
                                     <div class="col-md-4 mb-3">
                                         <label for="author_status" class="text-danger">Activity Status*</label>
@@ -230,8 +316,8 @@ include('common/head.php');
                                             Please provide Biography.
                                         </div>
                                     </div> 
-
                                 </div>
+
                             </form>
                         </div>
                         <div class="modal-footer">

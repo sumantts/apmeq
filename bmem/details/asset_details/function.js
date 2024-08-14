@@ -102,9 +102,7 @@ function clearForm(){
     $('#registration_number').removeClass('is-valid');
     $('#registration_number').removeClass('is-invalid');
 
-    $('#author_id').val('0');           
-    let img = document.getElementById('image');
-    img.src = '';
+    $('#asset_detail_id').val('0');  
 
 }//end 
 
@@ -122,7 +120,7 @@ $('#submitForm').click(function(){
 
         if($formVallidStatus == true){
             $category_id = $('#category_id').val();
-            $author_id = $('#author_id').val();
+            $asset_detail_id = $('#asset_detail_id').val();
             $author_photo = localStorage.getItem('author_photo');
             $author_status = $('#author_status').val();
             $for_the_year = $('#for_the_year').val();
@@ -131,7 +129,7 @@ $('#submitForm').click(function(){
             $.ajax({
                 method: "POST",
                 url: "details/asset_details/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, for_the_year: $for_the_year, course_id: $course_id, author_id: $author_id, author_name: $author_name, email: $email, registration_number: $registration_number, author_photo: $author_photo, author_status: $author_status }
+                data: { fn: "saveFormData", category_id: $category_id, for_the_year: $for_the_year, course_id: $course_id, asset_detail_id: $asset_detail_id, author_name: $author_name, email: $email, registration_number: $registration_number, author_photo: $author_photo, author_status: $author_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -153,12 +151,12 @@ $('#submitForm').click(function(){
     //}, 500)    
 })
 
-function editTableData($author_id){
+function editTableData($asset_detail_id){
     $('#exampleModalLong').modal('show');
     $.ajax({
         method: "POST",
         url: "details/asset_details/function.php",
-        data: { fn: "getFormEditData", author_id: $author_id }
+        data: { fn: "getFormEditData", asset_detail_id: $asset_detail_id }
     })
     .done(function( res ) {
         //console.log(res);
@@ -173,19 +171,19 @@ function editTableData($author_id){
             img.src = $res1.author_photo;
             localStorage.setItem("author_photo", $res1.author_photo);
             $('#author_status').val($res1.author_status).trigger('change');  
-            $('#author_id').val($author_id);
+            $('#asset_detail_id').val($asset_detail_id);
         }
     });//end ajax
 
 }
 
 //Delete function	
-function deleteTableData($author_id){
+function deleteTableData($asset_detail_id){
     if (confirm('Are you sure to delete the Data?')) {
         $.ajax({
             method: "POST",
             url: "details/asset_details/function.php",
-            data: { fn: "deleteTableData", author_id: $author_id }
+            data: { fn: "deleteTableData", asset_detail_id: $asset_detail_id }
         })
         .done(function( res ) {
             //console.log(res);
@@ -265,11 +263,11 @@ function populateDataTable(){
 
 
 //Category
-function configureCategoryDropDown(){
+function configureSupplierDropDown(){
     $.ajax({
         method: "POST",
         url: "details/asset_details/function.php",
-        data: { fn: "getAllCategoryName" }
+        data: { fn: "getAllSupplierName" }
     })
     .done(function( res ) {
         $res1 = JSON.parse(res);
@@ -277,14 +275,14 @@ function configureCategoryDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#category_id').html('');
-                $option_category_id = "<option value='0'>Select</option>";
+                $('#supplier_id').html('');
+                $html = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_category_id += "<option data-category_slug='"+$rows[$i].category_slug+"' value='"+$rows[$i].category_id+"'>"+$rows[$i].category_name+"</option>";                    
+                    $html += "<option value='"+$rows[$i].supplier_id+"'>"+$rows[$i].supplier_name+"</option>";                    
                 }//end for
                 
-                $('#category_id').html($option_category_id);
+                $('#supplier_id').html($html);
             }//end if
         }        
     });//end ajax
@@ -316,8 +314,88 @@ function configureCourseDropDown(){
     });//end ajax
 }//end
 
+function configureDepartmentDropDown(){
+    $.ajax({
+        method: "POST",
+        url: "details/asset_details/function.php",
+        data: { fn: "getAllDepartmentName" }
+    })
+    .done(function( res ) {
+        $res1 = JSON.parse(res); 
+        if($res1.status == true){
+            $rows = $res1.data;
+
+            if($rows.length > 0){
+                $('#department_id').html('');
+                $html = "<option value='0'>Select</option>";
+
+                for($i = 0; $i < $rows.length; $i++){
+                    $html += "<option value='"+$rows[$i].department_id+"'>"+$rows[$i].department_name+"</option>";                    
+                }//end for
+                
+                $('#department_id').html($html);
+            }//end if
+        }        
+    });//end ajax
+}//end
+
+//Course
+function configureHospitaDropDown(){
+    $.ajax({
+        method: "POST",
+        url: "details/user_details/function.php",
+        data: { fn: "getAllHospitaName" }
+    })
+    .done(function( res ) {
+        $res1 = JSON.parse(res);
+        if($res1.status == true){
+            $rows = $res1.data;
+
+            if($rows.length > 0){
+                $('#hospital_id').html('');
+                $html = "<option value='0'>Select</option>";
+
+                for($i = 0; $i < $rows.length; $i++){
+                    $html += "<option value='"+$rows[$i].hospital_id+"'>"+$rows[$i].hospital_name+"</option>";                    
+                }//end for
+                
+                $('#hospital_id').html($html);
+            }//end if
+        }        
+    });//end ajax
+}//end
+
+//Manufacturer
+function configureManufacturerDropDown(){
+    $.ajax({
+        method: "POST",
+        url: "details/asset_details/function.php",
+        data: { fn: "getAllManufacturerName" }
+    })
+    .done(function( res ) {
+        $res1 = JSON.parse(res);
+        if($res1.status == true){
+            $rows = $res1.data;
+
+            if($rows.length > 0){
+                $('#manufacturer_id').html('');
+                $html = "<option value='0'>Select</option>";
+
+                for($i = 0; $i < $rows.length; $i++){
+                    $html += "<option value='"+$rows[$i].manufacturer_id+"'>"+$rows[$i].manufacturer_name+"</option>";                    
+                }//end for
+                
+                $('#manufacturer_id').html($html);
+            }//end if
+        }        
+    });//end ajax
+}//end
+
 $(document).ready(function () {
-    configureCategoryDropDown(); 
-    configureCourseDropDown(); 
+    configureDepartmentDropDown();
+    configureHospitaDropDown(); 
+    configureManufacturerDropDown(); 
+    configureSupplierDropDown(); 
+    //configureCourseDropDown(); 
     populateDataTable();
 });

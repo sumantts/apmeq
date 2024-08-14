@@ -153,37 +153,4 @@
     	echo json_encode($return_array);
 	}//function end	
 
-	//Get Authors name
-	if($fn == 'getAllAuthorsyName'){
-		$return_array = array();
-		$status = true;
-		$mainData = array();
-
-		$sql = "SELECT * FROM author_details WHERE author_status = 'active' ORDER BY author_name ASC";
-		$result = $mysqli->query($sql);
-
-		if ($result->num_rows > 0) {
-			$status = true;
-			$slno = 1;
-			while($row = $result->fetch_array()){
-				$author_id = $row['author_id'];	
-				$author_name = $row['author_name'];	
-				$data = new stdClass();
-
-				$data->author_id = $author_id;
-				$data->author_name = $author_name;
-				
-				array_push($mainData, $data);
-				$slno++;
-			}
-		} else {
-			$status = false;
-		}
-		//$mysqli->close();
-
-		$return_array['status'] = $status;
-		$return_array['data'] = $mainData;
-    	echo json_encode($return_array);
-	}//function end	
-
 ?>

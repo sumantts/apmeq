@@ -135,11 +135,11 @@ include('common/head.php'); ?>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                            <!-- <button class="btn  btn-primary" type="button" id="submitForm">
+                            <button class="btn  btn-primary" type="button" id="submitForm">
                                 <span class="spinner-border spinner-border-sm" role="status" style="display: none;" id="submitForm_spinner"></span>
                                 <span class="load-text" style="display: none;" id="submitForm_spinner_text">Loading...</span>
                                 <span class="btn-text" id="submitForm_text">Save</span>
-                            </button> -->
+                            </button>
                         </div>
                     </div>
                 </div>
