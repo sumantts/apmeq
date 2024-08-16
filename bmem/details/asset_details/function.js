@@ -1,5 +1,5 @@
-$('#onMyModal').on('click', function(){
-    localStorage.setItem('author_photo', '');
+$('#onMyModal').on('click', function(){ 
+    $('#asset_detail_id').val('0');
     clearForm();
     $('#exampleModalLong').modal('show');
 })
@@ -116,20 +116,41 @@ $('#submitForm').click(function(){
     $('#submitForm_spinner_text').show();
     $('#submitForm_text').hide();
     //setTimeout(function(){
-        $formVallidStatus = validateForm();
+        $formVallidStatus = true;//validateForm();
 
         if($formVallidStatus == true){
-            $category_id = $('#category_id').val();
-            $asset_detail_id = $('#asset_detail_id').val();
-            $author_photo = localStorage.getItem('author_photo');
-            $author_status = $('#author_status').val();
-            $for_the_year = $('#for_the_year').val();
-            $course_id = 0;//$('#course_id').val();
+            $asset_detail_id = $('#asset_detail_id').val(); 
+            $name_of_asset = $('#name_of_asset').val(); 
+            $department_id = $('#department_id').val(); 
+            $hospital_id = $('#hospital_id').val(); 
+            $asset_code = $('#asset_code').val(); 
+            $manufacturer_id = $('#manufacturer_id').val(); 
+            $model_name = $('#model_name').val(); 
+            $supplier_id = $('#supplier_id').val(); 
+            $asset_slno = $('#asset_slno').val(); 
+            $equipment_name = $('#equipment_name').val(); 
+            $installation_date = $('#installation_date').val(); 
+            $total_year_in_service = $('#total_year_in_service').val(); 
+            $calibration_last_date = $('#calibration_last_date').val(); 
+            $calibration_frequency = $('#calibration_frequency').val(); 
+            $preventive_maintain_last_date = $('#preventive_maintain_last_date').val(); 
+            $preventive_maintenance_frequency = $('#preventive_maintenance_frequency').val(); 
+            $warenty = $('#warenty').val(); 
+            $amc = $('#amc').val(); 
+            $amc_last_date = $('#amc_last_date').val(); 
+            $cmc = $('#cmc').val(); 
+            $cmc_last_date = $('#cmc_last_date').val(); 
+            $service_providers_id = $('#service_providers_id').val(); 
+            $files_attached = $('#files_attached').val(); 
+            $reallocate_id = $('#reallocate_id').val(); 
+            $qa_certificate = $('#qa_certificate').val(); 
+            $qa_certificate_last_date = $('#qa_certificate_last_date').val(); 
+            $asset_status = $('#asset_status').val();
 
             $.ajax({
                 method: "POST",
                 url: "details/asset_details/function.php",
-                data: { fn: "saveFormData", category_id: $category_id, for_the_year: $for_the_year, course_id: $course_id, asset_detail_id: $asset_detail_id, author_name: $author_name, email: $email, registration_number: $registration_number, author_photo: $author_photo, author_status: $author_status }
+                data: { fn: "saveFormData", asset_detail_id: $asset_detail_id, name_of_asset: $name_of_asset, department_id: $department_id, hospital_id: $hospital_id, asset_code: $asset_code, manufacturer_id: $manufacturer_id, model_name: $model_name, supplier_id: $supplier_id, asset_slno: $asset_slno, equipment_name: $equipment_name, installation_date: $installation_date, total_year_in_service: $total_year_in_service, calibration_last_date: $calibration_last_date, calibration_frequency: $calibration_frequency, preventive_maintain_last_date: $preventive_maintain_last_date, preventive_maintenance_frequency: $preventive_maintenance_frequency, warenty: $warenty, amc: $amc, amc_last_date: $amc_last_date, cmc: $cmc, cmc_last_date: $cmc_last_date, service_providers_id: $service_providers_id, files_attached: $files_attached, reallocate_id: $reallocate_id, qa_certificate: $qa_certificate, qa_certificate_last_date: $qa_certificate_last_date, asset_status: $asset_status }
             })
             .done(function( res ) {
                 //console.log(res);
@@ -137,9 +158,9 @@ $('#submitForm').click(function(){
                 if($res1.status == true){
                     $('#orgFormAlert1').css("display", "block");
                     $('.toast-right').toast('show');
-                    //$('#liveToast').toast('show');
+                    
                     clearForm();
-                    localStorage.setItem('author_photo', '');
+                    
                     $('#exampleModalLong').modal('hide');
                     populateDataTable();
                 }else{
@@ -162,16 +183,35 @@ function editTableData($asset_detail_id){
         //console.log(res);
         $res1 = JSON.parse(res);
         if($res1.status == true){
-            $('#category_id').val($res1.category_id).trigger('change');
-            $('#for_the_year').val($res1.for_the_year).trigger('change');
-            $('#author_name').val($res1.author_name);
-            $('#email').val($res1.email);            
-            $('#registration_number').val($res1.registration_number); 
-            let img = document.getElementById('image');
-            img.src = $res1.author_photo;
-            localStorage.setItem("author_photo", $res1.author_photo);
-            $('#author_status').val($res1.author_status).trigger('change');  
+            //$('#category_id').val($res1.category_id).trigger('change'); 
             $('#asset_detail_id').val($asset_detail_id);
+            $('#name_of_asset').val($res1.name_of_asset);
+            $('#department_id').val($res1.department_id).trigger('change');
+            $('#hospital_id').val($res1.hospital_id).trigger('change');
+            $('#asset_code').val($res1.asset_code);
+            $('#manufacturer_id').val($res1.manufacturer_id).trigger('change');
+            $('#model_name').val($res1.model_name);
+            $('#supplier_id').val($res1.supplier_id).trigger('change');
+            $('#asset_slno').val($res1.asset_slno);
+            $('#equipment_name').val($res1.equipment_name);
+            $('#installation_date').val($res1.installation_date);
+            $('#total_year_in_service').val($res1.total_year_in_service);
+            $('#calibration_last_date').val($res1.calibration_last_date);
+            $('#calibration_frequency').val($res1.calibration_frequency);
+            $('#preventive_maintain_last_date').val($res1.preventive_maintain_last_date);
+            $('#preventive_maintenance_frequency').val($res1.preventive_maintenance_frequency);
+            $('#warenty').val($res1.warenty);
+            $('#amc').val($res1.amc);
+            $('#amc_last_date').val($res1.amc_last_date);
+            $('#cmc').val($res1.cmc);
+            $('#cmc_last_date').val($res1.cmc_last_date);
+            $('#service_providers_id').val($res1.service_providers_id).trigger('change');
+            $('#files_attached').val($res1.files_attached);
+            $('#reallocate_id').val($res1.reallocate_id);
+            $('#qa_certificate').val($res1.qa_certificate);
+            $('#qa_certificate_last_date').val($res1.qa_certificate_last_date);
+            $('#asset_status').val($res1.asset_status).trigger('change');
+
         }
     });//end ajax
 
@@ -288,12 +328,12 @@ function configureSupplierDropDown(){
     });//end ajax
 }//end
 
-//Course
+//Service providers
 function configureCourseDropDown(){
     $.ajax({
         method: "POST",
         url: "details/asset_details/function.php",
-        data: { fn: "getAllCourseName" }
+        data: { fn: "getAllServiceProvidersName" }
     })
     .done(function( res ) {
         $res1 = JSON.parse(res);
@@ -301,14 +341,14 @@ function configureCourseDropDown(){
             $rows = $res1.data;
 
             if($rows.length > 0){
-                $('#course_id').html('');
-                $option_course_id = "<option value='0'>Select</option>";
+                $('#service_providers_id').html('');
+                $html = "<option value='0'>Select</option>";
 
                 for($i = 0; $i < $rows.length; $i++){
-                    $option_course_id += "<option data-course_fee='"+$rows[$i].course_fee+"' data-course_duration='"+$rows[$i].course_duration+"' value='"+$rows[$i].course_id+"'>"+$rows[$i].course_name+"</option>";                    
+                    $html += "<option value='"+$rows[$i].service_providers_id+"'>"+$rows[$i].service_providers_name+"</option>";                    
                 }//end for
                 
-                $('#course_id').html($option_course_id);
+                $('#service_providers_id').html($html);
             }//end if
         }        
     });//end ajax
@@ -396,6 +436,6 @@ $(document).ready(function () {
     configureHospitaDropDown(); 
     configureManufacturerDropDown(); 
     configureSupplierDropDown(); 
-    //configureCourseDropDown(); 
+    configureCourseDropDown(); 
     populateDataTable();
 });

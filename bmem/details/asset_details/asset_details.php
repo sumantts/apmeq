@@ -301,19 +301,114 @@ include('common/head.php');
                                         <div class="invalid-feedback">
                                             Please provide Preventive Maintenance Frequency.
                                         </div>
-                                    </div>   
-                                    
+                                    </div>         
+
                                     <div class="col-md-4 mb-3">
-                                        <label for="author_status" class="text-danger">Activity Status*</label>
-                                        <select class="form-control" name="author_status" id="author_status">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                        <label for="warenty" class="text-danger">Warenty*</label>
+                                        <input type="text" class="form-control" id="warenty" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide Warenty period.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="amc" class="text-danger">AMC Period*</label>
+                                        <input type="text" class="form-control" id="amc" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide amc period.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="amc_last_date" class="text-danger">AMC Last Date*</label>
+                                        <input type="date" class="form-control" id="amc_last_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide amc period.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="cmc" class="text-danger">AMC Period*</label>
+                                        <input type="text" class="form-control" id="cmc" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide cmc period.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="cmc_last_date" class="text-danger">CMC Last Date*</label>
+                                        <input type="date" class="form-control" id="cmc_last_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide cmc period.
+                                        </div>
+                                    </div>   
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="service_providers_id" class="text-danger">Service Providers*</label>
+                                        <select class="form-control" name="service_providers_id" id="service_providers_id">
+                                            <option value="0">Select</option> 
                                         </select>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
                                         <div class="invalid-feedback">
-                                            Please provide Biography.
+                                            Please select Service Providers.
+                                        </div>
+                                    </div>   
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="files_attached">Attach Document</label>
+                                        <input type="file" class="form-control" id="files_attached" value="" > 
+                                    </div>         
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="qa_certificate" class="text-danger">QA Certificate*</label>
+                                        <input type="text" class="form-control" id="qa_certificate" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide QA Certificate.
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="qa_certificate_last_date" class="text-danger">QA Certificate Last Date*</label>
+                                        <input type="date" class="form-control" id="qa_certificate_last_date" value="" >
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please provide cmc period.
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="asset_status" class="text-danger">Activity Status*</label>
+                                        <select class="form-control" name="asset_status" id="asset_status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>                                    
+                                        <div class="invalid-feedback">
+                                            Please select status.
                                         </div>
                                     </div> 
                                 </div>
@@ -321,7 +416,7 @@ include('common/head.php');
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" id="author_id" value="0">
+                            <input type="hidden" id="asset_detail_id" value="0">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                             <button class="btn  btn-primary" type="button" id="submitForm">

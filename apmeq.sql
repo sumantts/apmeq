@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2024 at 05:39 PM
+-- Generation Time: Aug 16, 2024 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,8 +52,17 @@ CREATE TABLE `asset_details` (
   `service_providers_id` int(11) NOT NULL COMMENT 'PK of service_providers_list',
   `files_attached` text NOT NULL,
   `reallocate_id` int(11) NOT NULL COMMENT 'PK of asset_reallocate',
+  `qa_certificate` text NOT NULL,
+  `qa_certificate_last_date` date NOT NULL,
   `asset_status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `asset_details`
+--
+
+INSERT INTO `asset_details` (`asset_detail_id`, `name_of_asset`, `department_id`, `hospital_id`, `asset_code`, `manufacturer_id`, `model_name`, `supplier_id`, `asset_slno`, `equipment_name`, `installation_date`, `total_year_in_service`, `calibration_last_date`, `calibration_frequency`, `preventive_maintain_last_date`, `preventive_maintenance_frequency`, `warenty`, `amc`, `amc_last_date`, `cmc`, `cmc_last_date`, `service_providers_id`, `files_attached`, `reallocate_id`, `qa_certificate`, `qa_certificate_last_date`, `asset_status`) VALUES
+(1, '1', 3, 2, '2', 1, '4', 2, '3', '5', '2024-08-16', 6, '2024-08-16', 7, '2024-08-16', 8, '9', '10', '2024-08-16', '11', '2024-08-16', 1, '', 0, '12', '2024-08-16', 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +158,6 @@ CREATE TABLE `hospital_list` (
 --
 
 INSERT INTO `hospital_list` (`hospital_id`, `hospital_name`, `hospital_code`, `hospital_address`, `hospital_status`) VALUES
-(1, 'Uluberia Hospital', 'ULU001', '', 1),
 (2, 'Bagnan Hospital', 'BAG001', 'P.S - Bagnan ', 1);
 
 -- --------------------------------------------------------
@@ -247,7 +255,15 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`user_id`, `user_name`, `user_type_id`, `hospital_id`, `user_mobile`, `user_phone`, `user_email`, `user_dob`, `user_address`, `user_user_name`, `user_password`, `user_status`) VALUES
-(1, 'Suman Jana', 1, 1, '9733935161', '256789', 'sumanjana.6@gmail.com', '1987-10-01', 'Bagnan', 'sumanjana.6@gmail.com', '12345678', 1);
+(1, 'Suman Jana', 3, 2, '9733935161', '256789', 'sumanjana.6@gmail.com', '1987-10-01', 'Bagnan', 'sumanjana.6@gmail.com', '12345678', 1),
+(7, 'Mr. Developer', 3, 2, '9874563210', '', 'developer@apmeq.com', '2024-08-13', 'kolkata', 'developer@apmeq.com', '12345678', 1),
+(8, 'Mr. Super Admin', 1, 2, '9856320125', '', 'superadmin@apmeq.com', '2024-08-13', 'Kolkata', 'superadmin@apmeq.com', '12345678', 1),
+(9, 'Mr. Hospital Admin', 2, 2, '9874521542', '', 'hadmin@apmeq.com', '2024-08-13', 'kolkata', 'hadmin@apmeq.com', '12345678', 1),
+(10, 'Mr. Hospital Doctor', 4, 2, '9785421258', '', 'hdoctor@apmeq.com', '2024-08-13', 'kolkata', 'hdoctor@apmeq.com', '12345678', 1),
+(11, 'Mr. Hospital Incharge', 5, 2, '9758965230', '', 'hincharge@apmeq.com', '2024-08-13', 'kolkata', 'hincharge@apmeq.com', '12345678', 1),
+(12, 'Mr. Hospital Engineer', 6, 2, '9852125487', '', 'hengineer@apmeq.com', '2024-08-13', 'Kolkata', 'hengineer@apmeq.com', '12345678', 1),
+(13, 'Mr. AMC', 7, 2, '9632584512', '256789', 'amc@apmeq.com', '2024-08-13', 'kolkata', 'amc@apmeq.com', '12345678', 1),
+(14, 'Mr. Local', 8, 2, '9685215478', '', 'local@apmeq.com', '2024-08-13', 'kolkata', 'local@apmeq.com', '12345678', 1);
 
 -- --------------------------------------------------------
 
@@ -268,7 +284,13 @@ CREATE TABLE `user_type` (
 
 INSERT INTO `user_type` (`user_type_id`, `user_type_name`, `user_type_code`, `user_type_status`) VALUES
 (1, 'Super Admin', 'super', 1),
-(2, 'Hospital Admin', 'Hospital_Admin', 1);
+(2, 'Hospital Admin', 'h_admin', 1),
+(3, 'Developer', 'dev', 1),
+(4, 'Hospital Doctor', 'h_doc', 1),
+(5, 'Hospital Incharge', 'h_inch', 1),
+(6, 'Hospital Engineer', 'h_eng', 1),
+(7, 'Existing Service provider (amc/warenty)', 'sp_amc', 0),
+(8, 'Registered service provider (Local Service Provider)', 'sp_local', 0);
 
 --
 -- Indexes for dumped tables
@@ -342,7 +364,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `asset_details`
 --
 ALTER TABLE `asset_details`
-  MODIFY `asset_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `asset_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `asset_type_list`
@@ -390,13 +412,13 @@ ALTER TABLE `supplier_list`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_type`
 --
 ALTER TABLE `user_type`
-  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

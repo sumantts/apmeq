@@ -15,53 +15,53 @@
 		$password = '12345678';
 		$status = true;
 
-		$asset_detail_id = $_POST["asset_detail_id"];	
-		$category_id = $_POST["category_id"];	
-		$for_the_year = $_POST["for_the_year"];
-		$author_name = $_POST["author_name"];
-		$email = $_POST["email"];	
-		$registration_number = $_POST["registration_number"];
-		$author_photo = $_POST["author_photo"];	
-		$author_status = $_POST["author_status"];
+		
+		$asset_detail_id = $_POST['asset_detail_id']; 
+		$name_of_asset = $_POST['name_of_asset']; 
+		$department_id = $_POST['department_id']; 
+		$hospital_id = $_POST['hospital_id']; 
+		$asset_code = $_POST['asset_code']; 
+		$manufacturer_id = $_POST['manufacturer_id']; 
+		$model_name = $_POST['model_name']; 
+		$supplier_id = $_POST['supplier_id']; 
+		$asset_slno = $_POST['asset_slno']; 
+		$equipment_name = $_POST['equipment_name']; 
+		$installation_date = $_POST['installation_date']; 
+		$total_year_in_service = $_POST['total_year_in_service']; 
+		$calibration_last_date = $_POST['calibration_last_date']; 
+		$calibration_frequency = $_POST['calibration_frequency']; 
+		$preventive_maintain_last_date = $_POST['preventive_maintain_last_date']; 
+		$preventive_maintenance_frequency = $_POST['preventive_maintenance_frequency']; 
+		$warenty = $_POST['warenty']; 
+		$amc = $_POST['amc']; 
+		$amc_last_date = $_POST['amc_last_date']; 
+		$cmc = $_POST['cmc']; 
+		$cmc_last_date = $_POST['cmc_last_date']; 
+		$service_providers_id = $_POST['service_providers_id']; 
+		$files_attached = $_POST['files_attached']; 
+		$reallocate_id = 0;//$_POST['reallocate_id']; 
+		$qa_certificate = $_POST['qa_certificate']; 
+		$qa_certificate_last_date = $_POST['qa_certificate_last_date']; 
+		$asset_status = $_POST['asset_status'];
 		
 		try {
 			if($asset_detail_id > 0){
 				$status = true;
-				$sql = "UPDATE author_details SET category_id = '" .$category_id. "', for_the_year = '" .$for_the_year. "', author_name = '" .$author_name. "', email = '" .$email. "', registration_number = '" .$registration_number. "', author_photo = '" .$author_photo. "', author_status = '" .$author_status. "' WHERE asset_detail_id = '" .$asset_detail_id. "' ";
-				$result = $mysqli->query($sql);
-
-				//Update login table
-				$sql1 = "UPDATE login SET profile_name = '" .$author_name. "', username = '" .$email. "', password = '" .$password. "' WHERE asset_detail_id = '" .$asset_detail_id. "' ";
-				$result1 = $mysqli->query($sql1);
+				$sql = "UPDATE asset_details SET name_of_asset = '" .$name_of_asset. "', department_id = '" .$department_id. "', hospital_id = '" .$hospital_id. "', asset_code = '" .$asset_code. "', manufacturer_id = '" .$manufacturer_id. "', model_name = '" .$model_name. "', supplier_id = '" .$supplier_id. "', asset_slno = '" .$asset_slno. "', equipment_name = '" .$equipment_name. "', installation_date = '" .$installation_date. "', total_year_in_service = '" .$total_year_in_service. "', calibration_last_date = '" .$calibration_last_date. "', calibration_frequency = '" .$calibration_frequency. "', preventive_maintain_last_date = '" .$preventive_maintain_last_date. "', preventive_maintenance_frequency = '" .$preventive_maintenance_frequency. "', warenty = '" .$warenty. "', amc = '" .$amc. "', amc_last_date = '" .$amc_last_date. "', cmc = '" .$cmc. "', cmc_last_date = '" .$cmc_last_date. "', service_providers_id = '" .$service_providers_id. "', files_attached = '" .$files_attached. "', reallocate_id = '" .$reallocate_id. "', qa_certificate = '" .$qa_certificate. "', qa_certificate_last_date = '" .$qa_certificate_last_date. "', asset_status = '" .$asset_status. "' WHERE asset_detail_id = '" .$asset_detail_id. "'";
+				$result = $mysqli->query($sql);				
 			}else{
-				$check_sql = "SELECT * FROM author_details WHERE email = '" .$email. "' ";
-				$check_result = $mysqli->query($check_sql);
-
-				if ($check_result->num_rows > 0) {
-					$return_result['error_message'] = 'This email already exist';
-					$status = false;
-				}else{
-					$sql = "INSERT INTO author_details (category_id, for_the_year, author_name, email, registration_number, author_photo) VALUES ('" .$category_id. "', '" .$for_the_year. "', '" .$author_name. "', '" .$email. "', '" .$registration_number. "', '" .$author_photo. "')";
-					$result = $mysqli->query($sql);
-					$insert_id = $mysqli->insert_id;
-					if($insert_id > 0){
-						$status = true;
-
-						//Insert into login table
-						$sql1 = "INSERT INTO login (asset_detail_id, profile_name, username, password) VALUES ('" .$insert_id. "', '" .$author_name. "', '" .$email. "', '" .$password. "')";
-						$result1 = $mysqli->query($sql1);
-						$insert_id1 = $mysqli->insert_id;
-					}else{
-						$return_result['error_message'] = 'Photo size is soo large';
-						$status = false;
-					}	
-				}//end if	
+				$sql = "INSERT INTO asset_details (name_of_asset, department_id, hospital_id, asset_code, manufacturer_id, model_name, supplier_id, asset_slno, equipment_name, installation_date, total_year_in_service, calibration_last_date, calibration_frequency, preventive_maintain_last_date, preventive_maintenance_frequency, warenty, amc, amc_last_date, cmc, cmc_last_date, service_providers_id, files_attached, reallocate_id, qa_certificate, qa_certificate_last_date, asset_status) VALUES ('" .$name_of_asset. "', '" .$department_id. "', '" .$hospital_id. "', '" .$asset_code. "', '" .$manufacturer_id. "', '" .$model_name. "', '" .$supplier_id. "', '" .$asset_slno. "', '" .$equipment_name. "', '" .$installation_date. "', '" .$total_year_in_service. "', '" .$calibration_last_date. "', '" .$calibration_frequency. "', '" .$preventive_maintain_last_date. "', '" .$preventive_maintenance_frequency. "', '" .$warenty. "', '" .$amc. "', '" .$amc_last_date. "', '" .$cmc. "', '" .$cmc_last_date. "', '" .$service_providers_id. "', '" .$files_attached. "', '" .$reallocate_id. "', '" .$qa_certificate. "', '" .$qa_certificate_last_date. "', '" .$asset_status. "')";
+				$result = $mysqli->query($sql);
+				$asset_detail_id = $mysqli->insert_id;
+				if($asset_detail_id > 0){
+					$status = true;					
+				}	
 			}	
 		} catch (PDOException $e) {
 			die("Error occurred:" . $e->getMessage());
 		}
 		$return_result['status'] = $status;
-		$return_result['login_id'] = $insert_id1;
+		$return_result['asset_detail_id'] = $asset_detail_id;
 		//sleep(2);
 		echo json_encode($return_result);
 	}//Save function end	
@@ -146,36 +146,71 @@
 		$mainData = array();
 		$asset_detail_id = $_POST['asset_detail_id'];
 
-		$sql = "SELECT * FROM author_details WHERE asset_detail_id = '" .$asset_detail_id. "'";
+		$sql = "SELECT * FROM asset_details WHERE asset_detail_id = '" .$asset_detail_id. "'";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;	
 			$row = $result->fetch_array();
-			$asset_detail_id = $row['asset_detail_id'];		
-			$category_id = $row['category_id'];		
-			$for_the_year = $row['for_the_year'];			
-			$author_name = $row['author_name'];		
-			$email = $row['email'];				
-			$registration_number = $row['registration_number'];			
-			$author_status = $row['author_status'];	
-			if($row['author_photo'] != ''){
-				$author_photo = $row['author_photo'];	
-			}else{
-				$author_photo = '';
-			}
+			$asset_detail_id = $row['asset_detail_id'];
+			$name_of_asset = $row['name_of_asset'];
+			$department_id = $row['department_id'];
+			$hospital_id = $row['hospital_id'];
+			$asset_code = $row['asset_code'];
+			$manufacturer_id = $row['manufacturer_id'];
+			$model_name = $row['model_name'];
+			$supplier_id = $row['supplier_id'];
+			$asset_slno = $row['asset_slno'];
+			$equipment_name = $row['equipment_name'];
+			$installation_date = $row['installation_date'];
+			$total_year_in_service = $row['total_year_in_service'];
+			$calibration_last_date = $row['calibration_last_date'];
+			$calibration_frequency = $row['calibration_frequency'];
+			$preventive_maintain_last_date = $row['preventive_maintain_last_date'];
+			$preventive_maintenance_frequency = $row['preventive_maintenance_frequency'];
+			$warenty = $row['warenty'];
+			$amc = $row['amc'];
+			$amc_last_date = $row['amc_last_date'];
+			$cmc = $row['cmc'];
+			$cmc_last_date = $row['cmc_last_date'];
+			$service_providers_id = $row['service_providers_id'];
+			$files_attached = $row['files_attached'];
+			$reallocate_id = $row['reallocate_id'];
+			$qa_certificate = $row['qa_certificate'];
+			$qa_certificate_last_date = $row['qa_certificate_last_date'];
+			$asset_status = $row['asset_status'];
 		} else {
 			$status = false;
 		}
 		//$mysqli->close();
-
-		$return_array['author_name'] = $author_name;
-		$return_array['category_id'] = $category_id;
-		$return_array['for_the_year'] = $for_the_year;
-		$return_array['email'] = $email;
-		$return_array['registration_number'] = $registration_number;
-		$return_array['author_photo'] = $author_photo;
-		$return_array['author_status'] = $author_status;
+		
+		$return_array['asset_detail_id'] = $asset_detail_id;
+		$return_array['name_of_asset'] = $name_of_asset;
+		$return_array['department_id'] = $department_id;
+		$return_array['hospital_id'] = $hospital_id;
+		$return_array['asset_code'] = $asset_code;
+		$return_array['manufacturer_id'] = $manufacturer_id;
+		$return_array['model_name'] = $model_name;
+		$return_array['supplier_id'] = $supplier_id;
+		$return_array['asset_slno'] = $asset_slno;
+		$return_array['equipment_name'] = $equipment_name;
+		$return_array['installation_date'] = $installation_date;
+		$return_array['total_year_in_service'] = $total_year_in_service;
+		$return_array['calibration_last_date'] = $calibration_last_date;
+		$return_array['calibration_frequency'] = $calibration_frequency;
+		$return_array['preventive_maintain_last_date'] = $preventive_maintain_last_date;
+		$return_array['preventive_maintenance_frequency'] = $preventive_maintenance_frequency;
+		$return_array['warenty'] = $warenty;
+		$return_array['amc'] = $amc;
+		$return_array['amc_last_date'] = $amc_last_date;
+		$return_array['cmc'] = $cmc;
+		$return_array['cmc_last_date'] = $cmc_last_date;
+		$return_array['service_providers_id'] = $service_providers_id;
+		$return_array['files_attached'] = $files_attached;
+		$return_array['reallocate_id'] = $reallocate_id;
+		$return_array['qa_certificate'] = $qa_certificate;
+		$return_array['qa_certificate_last_date'] = $qa_certificate_last_date;
+		$return_array['asset_status'] = $asset_status;
 		$return_array['status'] = $status;
     	echo json_encode($return_array);
 	}//function end
@@ -186,12 +221,9 @@
 		$asset_detail_id = $_POST["asset_detail_id"];
 		$status = true;	
 
-		$sql = "DELETE FROM author_details WHERE asset_detail_id = '".$asset_detail_id."'";
+		$sql = "DELETE FROM asset_details WHERE asset_detail_id = '".$asset_detail_id."'";
 		$result = $mysqli->query($sql);
-
-		//Delete from Login table
-		$sql1 = "DELETE FROM login WHERE asset_detail_id = '".$asset_detail_id."'";
-		$result1 = $mysqli->query($sql1);
+		
 
 		$return_result['status'] = $status;
 		//sleep(1);
@@ -236,35 +268,31 @@
 	}//end if
 
 	//Get Course name
-	if($fn == 'getAllCourseName'){
+	if($fn == 'getAllServiceProvidersName'){
 		$return_array = array();
 		$status = true;
 		$mainData = array(); 
 
-		/*$sql = "SELECT * FROM course_fee_detail ORDER BY course_name ASC";
+		$sql = "SELECT * FROM service_providers_list WHERE service_providers_status = 1 ORDER BY service_providers_name ASC";
 		$result = $mysqli->query($sql);
 
 		if ($result->num_rows > 0) {
 			$status = true;
 			$slno = 1;
 			while($row = $result->fetch_array()){
-				$course_id = $row['course_id'];	
-				$course_name = $row['course_name'];			
-				$course_fee = $row['course_fee'];		
-				$course_duration = $row['course_duration'];
-				$data = new stdClass();
+				$service_providers_id = $row['service_providers_id'];	
+				$service_providers_name = $row['service_providers_name']; 
 
-				$data->course_id = $course_id;
-				$data->course_name = $course_name;
-				$data->course_fee = $course_fee;
-				$data->course_duration = $course_duration;
+				$data = new stdClass();
+				$data->service_providers_id = $service_providers_id;
+				$data->service_providers_name = $service_providers_name; 
 				
 				array_push($mainData, $data);
 				$slno++;
 			}
 		} else {
 			$status = false;
-		} */
+		}
 
 		$return_array['status'] = $status;
 		$return_array['data'] = $mainData;
