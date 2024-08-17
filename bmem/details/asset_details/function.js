@@ -1,8 +1,13 @@
 $('#onMyModal').on('click', function(){ 
     $('#asset_detail_id').val('0');
+    $('#partTwoBoard').hide();
     clearForm();
     $('#exampleModalLong').modal('show');
 })
+
+$("#partTwoSwitch").click(function(){
+    $("#partTwoBoard").toggle('slow');
+});
 
 function validateForm(){
     $category_id = $('#category_id').val();
@@ -116,6 +121,9 @@ $('#submitForm').click(function(){
     $('#submitForm_spinner_text').show();
     $('#submitForm_text').hide();
     //setTimeout(function(){
+        $('#submitForm_spinner').hide();
+        $('#submitForm_spinner_text').hide();
+        $('#submitForm_text').show();
         $formVallidStatus = true;//validateForm();
 
         if($formVallidStatus == true){
@@ -173,6 +181,7 @@ $('#submitForm').click(function(){
 })
 
 function editTableData($asset_detail_id){
+    getAllProductImages($asset_detail_id);
     $('#exampleModalLong').modal('show');
     $.ajax({
         method: "POST",
@@ -431,6 +440,111 @@ function configureManufacturerDropDown(){
     });//end ajax
 }//end
 
+//Multiple Photo Upload
+function uploadajax(ttl,cl){
+    $asset_detail_id = $('#asset_detail_id').val();
+
+    var fileList = $('#files_attached').prop("files"); 
+    var form_data =  "";
+    form_data = new FormData();
+    form_data.append("upload_image", fileList[cl]);
+    form_data.append("asset_detail_id", $asset_detail_id);
+
+    var request = $.ajax({
+        url: "details/asset_details/upload.php",
+        cache: false,
+        contentType: false,
+        processData: false,
+        async: true,
+        data: form_data,
+        type: 'POST', 
+        success: function (res, status) {
+            console.log('return data: '+res + ' status: ' + status);
+            $res1 = JSON.parse(res);
+            if ($res1.status == true) {
+                $upload_count++;
+                percent = 0; 
+                if (cl < ttl) {
+                    uploadajax(ttl, cl + 1);
+                } else {
+                    console.log('Done');
+                    $('#uploadMessage').html($upload_count + ' Files Uploaded');
+                    getAllProductImages($asset_detail_id);
+                }
+            }
+        },
+        fail: function (res) {
+            console.log('Failed');
+        }    
+    })
+}
+
+$('#startUpload').on('click', function(){
+    console.log('upload start...');    
+    $asset_detail_id = $('#asset_detail_id').val();
+    $upload_count = 0;
+    if($asset_detail_id > 0){
+        $('#uploadMessage').html('');
+        var fileList = $('#files_attached').prop("files"); 
+        var i;
+        for ( i = 0; i < fileList.length; i++) { 
+            if(i == fileList.length-1){
+                uploadajax(fileList.length-1,0);
+            }
+        }
+    }else{
+        alert('Please enter asset name first');
+    }//end if
+}); 
+
+function getAllProductImages($asset_detail_id){
+    console.log(' fun calling...');
+    $('#product_gallery').html('');
+    $.ajax({
+        method: "POST",
+        url: "details/asset_details/function.php",
+        data: { fn: "getAllProductImages", asset_detail_id: $asset_detail_id }
+    })
+    .done(function( res ) {
+        $res1 = JSON.parse(res);
+        //console.log(JSON.stringify($res1));
+        if($res1.status == true){
+            $all_images = $res1.all_images;
+
+            if($all_images.length > 0){ 
+                $html = "";
+                console.log('all_images length: '+$all_images.length);
+                for($i in $all_images ){
+                    $html += '<img src="details/asset_details/photos/'+$all_images[$i]+'" width="75" class="img-fluid img-thumbnail" alt="..."><a href="javascript: void(0)"> <i class="fa fa-trash" aria-hidden="true" onclick="deleteProdImage(\''+$all_images[$i]+'\')"></i></a>'; 
+                }//end for
+                
+                $('#product_gallery').html($html);
+            }//end if
+        } //end if       
+    });//end ajax
+
+}//end if
+
+function deleteProdImage($prod_iamge_name){
+    console.log('prod_iamge_name: ' + $prod_iamge_name);
+    if (confirm('Are you sure to delete the Image?')) {
+        $asset_detail_id = $('#asset_detail_id').val();
+        $.ajax({
+            method: "POST",
+            url: "details/asset_details/function.php",
+            data: { fn: "deleteProdImage", asset_detail_id: $asset_detail_id, prod_iamge_name: $prod_iamge_name }
+        })
+        .done(function( res ) {
+            //console.log(res);
+            $res1 = JSON.parse(res);
+            if($res1.status == true){
+                getAllProductImages($asset_detail_id);
+            }
+        });//end ajax
+    }		
+}//end fun
+//End multiple pgoto upload
+
 $(document).ready(function () {
     configureDepartmentDropDown();
     configureHospitaDropDown(); 
@@ -439,3 +553,4 @@ $(document).ready(function () {
     configureCourseDropDown(); 
     populateDataTable();
 });
+

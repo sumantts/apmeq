@@ -1,5 +1,5 @@
 <?php 
-if(!$_SESSION["user_id"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
+if(!$_SESSION["user_type_code"] || !$_SESSION["user_type_code"]){header('location:?p=signin');}
 include('common/head.php');  
 ?>
 
@@ -250,7 +250,7 @@ include('common/head.php');
 
                                     <div class="col-md-4 mb-3">
                                         <label for="total_year_in_service" class="text-danger">Total Year in Service*</label>
-                                        <input type="text" class="form-control" id="total_year_in_service" value="" >
+                                        <input type="number" class="form-control" id="total_year_in_service" value="" >
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
@@ -272,7 +272,7 @@ include('common/head.php');
 
                                     <div class="col-md-4 mb-3">
                                         <label for="calibration_frequency" class="text-danger">Calibration Frequency*</label>
-                                        <input type="text" class="form-control" id="calibration_frequency" value="" >
+                                        <input type="number" class="form-control" id="calibration_frequency" value="" >
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>                                    
@@ -371,10 +371,10 @@ include('common/head.php');
                                         </div>
                                     </div>   
 
-                                    <div class="col-md-4 mb-3">
+                                    <!-- <div class="col-md-4 mb-3">
                                         <label for="files_attached">Attach Document</label>
                                         <input type="file" class="form-control" id="files_attached" value="" > 
-                                    </div>         
+                                    </div>          -->
 
                                     <div class="col-md-4 mb-3">
                                         <label for="qa_certificate" class="text-danger">QA Certificate*</label>
@@ -409,6 +409,27 @@ include('common/head.php');
                                         </div>                                    
                                         <div class="invalid-feedback">
                                             Please select status.
+                                        </div>
+                                    </div> 
+                                </div>
+                                <a href="javascript: void(0);" id="partTwoSwitch" class="float-right">Upload Document</a>
+                                <br>
+                                <hr>
+
+                                <div class="form-row" id="partTwoBoard"> 
+                                    <div class="col-md-3 mt-4">
+                                        <input type="file" id="files_attached" name="uploadFiledd[]" multiple accept=".jpg,.jpeg,.png" >
+                                        <span id="uploadMessage"></span>
+                                    </div> 
+
+                                    <div class="col-md-1 mt-4"> 
+                                        <button type="button" id="startUpload" class="btn btn-primary btn-sm">Upload</button>
+                                    </div> 
+
+                                    <div class="col-md-12 mb-3">
+                                        <div class="text-center" id="product_gallery"> 
+                                            <img src="details/asset_details/photos/no_doc.jpg" width="75" class="img-fluid img-thumbnail" alt="...">
+                                            <!-- <a href='javascript: void(0)'> <i class='fa fa-trash' aria-hidden='true' onclick='deleteProdImage()'></i></a>  -->
                                         </div>
                                     </div> 
                                 </div>
